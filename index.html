@@ -220,7 +220,7 @@
         }
 
         /* ═══════════════════════════════════
-           Articles Grid (Full-Width Hero)
+           Articles Grid
            ═══════════════════════════════════ */
         .grid-wrapper {
             max-width: 1320px;
@@ -295,6 +295,7 @@
             flex-direction: column;
             opacity: 0;
             animation: fadeUp 0.4s ease forwards;
+            position: relative;
         }
 
         .article-card:hover {
@@ -316,6 +317,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             object-fit: cover;
+            filter: brightness(0.7);
             transition: transform 0.4s ease;
         }
 
@@ -336,6 +338,49 @@
             border-radius: 4px;
             backdrop-filter: blur(6px);
             border: 1px solid rgba(212, 175, 55, 0.12);
+            z-index: 2;
+        }
+
+        /* ── Read Checkmark ── */
+        .card-read-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            background: rgba(10, 11, 13, 0.82);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .card-read-badge svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* ── Fallback placeholder / watermark styling ── */
+        .card-image-placeholder {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            aspect-ratio: 16 / 9;
+            background: #14161A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: brightness(0.7);
+        }
+
+        .card-image-placeholder svg {
+            width: 40%;
+            height: 40%;
+            opacity: 0.1;
         }
 
         .card-body {
@@ -527,6 +572,31 @@
             border-top: 1px solid var(--border);
         }
 
+        /* ── Email Us Ghost Button ── */
+        .email-cta {
+            display: inline-block;
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 17px;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            color: var(--gold);
+            background: transparent;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 14px 40px;
+            text-decoration: none;
+            transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.2s;
+            margin-top: 12px;
+        }
+
+        .email-cta:hover {
+            background: var(--gold);
+            color: var(--bg);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+            transform: translateY(-1px);
+            border-bottom-color: var(--gold);
+        }
+
         /* ═══════════════════════════════════
            Load More
            ═══════════════════════════════════ */
@@ -641,6 +711,39 @@
             margin: 0 auto 10px;
         }
 
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .footer-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 4px 8px;
+            transition: color 0.2s;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .footer-link:hover {
+            color: var(--gold);
+        }
+
+        .footer-link-sep {
+            color: #2A2D35;
+            font-size: 11px;
+            user-select: none;
+        }
+
         .footer-copy {
             font-size: 10px;
             color: #3A3D45;
@@ -729,7 +832,7 @@
             <div class="source-filters" id="sourceFilters"></div>
         </div>
 
-        <!-- Skeleton Loading State (matches ~2 rows of 3 + 1 ad slot worth of space) -->
+        <!-- Skeleton Loading State -->
         <div class="skeleton-grid" id="skeletonGrid">
             <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div></div>
             <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div></div>
@@ -765,6 +868,7 @@
             <hr class="page-rule">
             <p>Mainspring News is the premier aggregator for watch enthusiasts, winding the world's best horological journalism into a single, high-tension feed. We curate articles from the most respected voices in the industry &mdash; from Hodinkee and Fratello to Worn &amp; Wound and beyond &mdash; so you never miss a breaking release, an in-depth review, or a thought-provoking editorial about the craft of watchmaking.</p>
             <p>Our mission is simple: to save you time while keeping you informed. Rather than cycling through bookmarks and newsletters, Mainspring News delivers a unified, real-time stream of everything happening in the world of watches. Whether you collect vintage chronographs, follow the latest from Geneva, or simply appreciate mechanical artistry, this is your feed &mdash; wound and ready.</p>
+            <p>Mainspring News was founded to solve the noise problem in the watch industry. By aggregating the most respected voices in horology, we ensure you spend less time searching and more time reading what matters.</p>
 
             <h3>Our Sources</h3>
             <ul>
@@ -776,8 +880,17 @@
                 <li>Teddy Baldassarre</li>
                 <li>Two Broke Watch Snobs</li>
                 <li>Oracle Time</li>
+                <li>Time + Tide</li>
+                <li>WatchTime</li>
+                <li>Revolution</li>
+                <li>Quill &amp; Pad</li>
+                <li>WatchProSite</li>
             </ul>
             <p>All content remains the property of its original authors and publishers. Mainspring News links directly to original articles and does not reproduce full-text content.</p>
+
+            <h3>Get in Touch</h3>
+            <p>Have a question, suggestion, or just want to talk watches? We'd love to hear from you.</p>
+            <a class="email-cta" href="mailto:mainspring.watchnews@gmail.com?subject=Inquiry from Mainspring News" target="_blank" rel="noopener noreferrer">Email Us</a>
         </div>
     </section>
 
@@ -809,8 +922,7 @@
             <p>For more information on how Google collects and processes data, please review <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.</p>
 
             <h3>3. Third-Party Links</h3>
-            <p>Mainspring News contains links to external websites, including but not limited to the original publishers of aggregated articles, eBay, and Bezel. These third-party sites operate under their own privacy policies. Mainspring News is not responsible for the content or privacy practices of these external sites. We encourage you to review the privacy policies of any website you visit through links on our platform.</p>
-            <p>As an eBay Partner and Bezel Ambassador, Mainspring News may earn commissions from qualifying purchases made through affiliate links, at no extra cost to you.</p>
+            <p>Mainspring News contains links to external websites, including but not limited to the original publishers of aggregated articles. These third-party sites operate under their own privacy policies. Mainspring News is not responsible for the content or privacy practices of these external sites. We encourage you to review the privacy policies of any website you visit through links on our platform.</p>
 
             <h3>4. User Rights</h3>
             <p>Depending on your jurisdiction, you may have the following rights regarding your data:</p>
@@ -828,7 +940,7 @@
             <p>We reserve the right to update this Privacy Policy at any time. Changes will be posted on this page with an updated revision date. Continued use of Mainspring News after changes constitutes acceptance of the revised policy.</p>
 
             <h3>7. Contact</h3>
-            <p>If you have questions about this Privacy Policy, please reach out via the contact information provided on the site.</p>
+            <p>If you have questions about this Privacy Policy, please reach out via <a href="mailto:mainspring.watchnews@gmail.com?subject=Privacy Inquiry - Mainspring News" target="_blank" rel="noopener noreferrer">mainspring.watchnews@gmail.com</a>.</p>
 
             <p class="last-updated">Last updated: February 2026</p>
         </div>
@@ -843,7 +955,14 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-        <p class="footer-disclosure">As an eBay Partner and Bezel Ambassador, Mainspring News may earn from qualifying purchases at no extra cost to you. This site uses Google AdSense to display advertisements.</p>
+        <div class="footer-links">
+            <button class="footer-link" data-page="about">About</button>
+            <span class="footer-link-sep">&middot;</span>
+            <button class="footer-link" data-page="privacy">Privacy</button>
+            <span class="footer-link-sep">&middot;</span>
+            <a class="footer-link" href="mailto:mainspring.watchnews@gmail.com?subject=Inquiry from Mainspring News" target="_blank" rel="noopener noreferrer">Contact</a>
+        </div>
+        <p class="footer-disclosure">This site uses Google AdSense to display advertisements.</p>
         <p class="footer-copy">&copy; 2026 Mainspring News. All article content belongs to its respective publishers.</p>
     </footer>
 
@@ -859,20 +978,57 @@
             { name: 'A Blog to Watch',       url: 'https://www.ablogtowatch.com/feed/' },
             { name: 'Teddy Baldassarre',     url: 'https://teddybaldassarre.com/en-int/blogs/watches.atom' },
             { name: 'Two Broke Watch Snobs', url: 'https://twobrokewatchsnobs.com/feed/' },
-            { name: 'Oracle Time',           url: 'https://oracleoftime.com/feed/' }
+            { name: 'Oracle Time',           url: 'https://oracleoftime.com/feed/' },
+            { name: 'Time + Tide',           url: 'https://timeandtidewatches.com/feed/' },
+            { name: 'WatchTime',             url: 'https://www.watchtime.com/feed/' },
+            { name: 'Revolution',            url: 'https://revolutionwatch.com/feed/' },
+            { name: 'Quill & Pad',           url: 'https://quillandpad.com/feed/' },
+            { name: 'WatchProSite',          url: 'https://www.watchprosite.com/rss/' }
         ];
 
         const RSS2JSON_BASE = 'https://api.rss2json.com/v1/api.json?rss_url=';
 
-        // Randomized ad placement: ads appear every 4–7 cards
-        const AD_GAP_MIN = 4;
-        const AD_GAP_MAX = 7;
+        // Ads appear every 7–10 cards
+        const AD_GAP_MIN = 7;
+        const AD_GAP_MAX = 10;
 
-        // Fallback placeholder for articles with no extractable image
-        const PLACEHOLDER_IMG = 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=600&h=338&fit=crop&q=80';
+        // Articles per page (pagination)
+        const PAGE_SIZE = 36;
+
+        // Fallback placeholder: skeletonized mechanical movement macro
+        const PLACEHOLDER_IMG = 'https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?w=600&h=338&fit=crop&q=80';
 
         let allArticles = [];
+        let filteredArticles = [];
         let activeSource = null;
+        let displayedCount = 0;
+        let adCounter = 0;
+        let nextAdAt = 0;
+
+        // ══════════════════════════════════
+        //  Read Tracking (localStorage)
+        // ══════════════════════════════════
+        const READ_STORAGE_KEY = 'mainspring_read_articles';
+
+        function getReadArticles() {
+            try {
+                return JSON.parse(localStorage.getItem(READ_STORAGE_KEY)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function markAsRead(url) {
+            const read = getReadArticles();
+            if (!read.includes(url)) {
+                read.push(url);
+                localStorage.setItem(READ_STORAGE_KEY, JSON.stringify(read));
+            }
+        }
+
+        function isRead(url) {
+            return getReadArticles().includes(url);
+        }
 
         // ══════════════════════════════════
         //  Navigation / Tab System
@@ -880,33 +1036,45 @@
         const navLinks = document.querySelectorAll('.nav-link');
         const pageSections = document.querySelectorAll('.page-section');
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                const target = link.dataset.page;
-                navLinks.forEach(n => n.classList.remove('active'));
-                link.classList.add('active');
-                pageSections.forEach(s => s.classList.toggle('active', s.id === `page-${target}`));
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+        function navigateToPage(target) {
+            navLinks.forEach(n => {
+                n.classList.toggle('active', n.dataset.page === target);
             });
+            pageSections.forEach(s => s.classList.toggle('active', s.id === `page-${target}`));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => navigateToPage(link.dataset.page));
+        });
+
+        // Footer nav links
+        document.querySelectorAll('.footer-link[data-page]').forEach(link => {
+            link.addEventListener('click', () => navigateToPage(link.dataset.page));
         });
 
         // ══════════════════════════════════
         //  Helpers
         // ══════════════════════════════════
-        function extractImage(item) {
-            // Priority 1: Enclosure (most reliable for podcast/blog feeds like TBWS)
+        function extractImage(item, sourceName) {
+            // Priority 1: Enclosure
             if (item.enclosure && item.enclosure.link) return item.enclosure.link;
             // Priority 2: Thumbnail field
             if (item.thumbnail && item.thumbnail.length > 0) return item.thumbnail;
             // Priority 3: First <img> tag inside description or content
-            const content = item.description || item.content || '';
+            // For Two Broke Watch Snobs, also check content:encoded
+            const content = item.content || item.description || '';
             const m = content.match(/<img[^>]+src=["']([^"']+)["']/i);
             if (m) return m[1];
-            // Priority 4: Watch-related placeholder
-            return PLACEHOLDER_IMG;
+            // Priority 4: For TBWS and others, check description separately if content was used above
+            if (item.description && item.description !== content) {
+                const m2 = item.description.match(/<img[^>]+src=["']([^"']+)["']/i);
+                if (m2) return m2[1];
+            }
+            // No image found
+            return null;
         }
 
-        // Random integer between min and max (inclusive)
         function randBetween(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
@@ -930,6 +1098,23 @@
             return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         }
 
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ══════════════════════════════════
+        //  SVG Templates
+        // ══════════════════════════════════
+        const MAINSPRING_SVG = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 18 C63 18, 74 27, 76 40 C78 53, 70 64, 58 67 C46 70, 35 63, 32 52 C29 41, 35 31, 45 28 C55 25, 63 31, 65 40 C67 49, 61 56, 53 58 C45 60, 39 55, 38 48 C37 41, 42 37, 48 37"
+                  stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="48" cy="37" r="2.5" fill="#D4AF37"/>
+        </svg>`;
+
+        const READ_CHECK_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+
         // ══════════════════════════════════
         //  Fetch Feeds
         // ══════════════════════════════════
@@ -942,7 +1127,7 @@
                         return data.items.map(item => ({
                             title: item.title || '',
                             link: item.link || '',
-                            image: extractImage(item),
+                            image: extractImage(item, feed.name),
                             summary: createSummary(item.description),
                             source: feed.name,
                             date: item.pubDate || '',
@@ -963,7 +1148,7 @@
             document.getElementById('gridWrapper').style.display = 'block';
 
             renderSourceFilters();
-            renderArticles();
+            applyFiltersAndRender();
         }
 
         // ══════════════════════════════════
@@ -973,7 +1158,7 @@
             const container = document.getElementById('sourceFilters');
             const sources = [...new Set(allArticles.map(a => a.source))];
             container.innerHTML = sources.map(s =>
-                `<button class="source-pill" data-source="${s}">${s}</button>`
+                `<button class="source-pill" data-source="${escapeHtml(s)}">${escapeHtml(s)}</button>`
             ).join('');
 
             container.querySelectorAll('.source-pill').forEach(pill => {
@@ -987,9 +1172,44 @@
                         container.querySelectorAll('.source-pill').forEach(p => p.classList.remove('active'));
                         pill.classList.add('active');
                     }
-                    renderArticles();
+                    applyFiltersAndRender();
                 });
             });
+        }
+
+        // ══════════════════════════════════
+        //  Filter + Reset Pagination
+        // ══════════════════════════════════
+        function applyFiltersAndRender() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+
+            filteredArticles = allArticles;
+            if (activeSource) filteredArticles = filteredArticles.filter(a => a.source === activeSource);
+            if (query) filteredArticles = filteredArticles.filter(a =>
+                a.title.toLowerCase().includes(query) ||
+                a.summary.toLowerCase().includes(query) ||
+                a.source.toLowerCase().includes(query)
+            );
+
+            // Reset pagination state
+            displayedCount = 0;
+            adCounter = 0;
+            nextAdAt = randBetween(AD_GAP_MIN, AD_GAP_MAX);
+
+            const grid = document.getElementById('articlesGrid');
+            grid.innerHTML = '';
+
+            if (filteredArticles.length === 0) {
+                grid.innerHTML = `<div class="no-results">
+                    <h3>No articles found</h3>
+                    <p>Try adjusting your search or clearing the source filter.</p>
+                </div>`;
+                document.getElementById('loadMoreWrapper').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('loadMoreWrapper').style.display = 'block';
+            appendNextPage();
         }
 
         // ══════════════════════════════════
@@ -1008,61 +1228,152 @@
         }
 
         // ══════════════════════════════════
-        //  Render Articles
+        //  Image Error Handler
         // ══════════════════════════════════
-        function renderArticles() {
-            const grid = document.getElementById('articlesGrid');
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+        function handleImageError(img) {
+            const container = img.parentNode;
+            if (!container) return;
 
-            let filtered = allArticles;
-            if (activeSource) filtered = filtered.filter(a => a.source === activeSource);
-            if (query) filtered = filtered.filter(a =>
-                a.title.toLowerCase().includes(query) ||
-                a.summary.toLowerCase().includes(query) ||
-                a.source.toLowerCase().includes(query)
-            );
-
-            if (filtered.length === 0) {
-                grid.innerHTML = `<div class="no-results">
-                    <h3>No articles found</h3>
-                    <p>Try adjusting your search or clearing the source filter.</p>
-                </div>`;
+            // Prevent infinite loops: mark that we've already tried the fallback
+            if (img.dataset.fallbackAttempted) {
+                handleImageFinalFallback(img);
                 return;
             }
 
-            const items = [];
-            let adN = 0;
-            let articleCount = 0;
-            let nextAdAt = randBetween(AD_GAP_MIN, AD_GAP_MAX); // first ad after 4–7 cards
+            // First failure: try the skeletonized movement placeholder
+            img.dataset.fallbackAttempted = 'true';
+            img.onerror = function() { handleImageFinalFallback(this); };
+            img.src = PLACEHOLDER_IMG;
+        }
 
-            filtered.forEach((a, i) => {
-                articleCount++;
+        function handleImageFinalFallback(img) {
+            const container = img.parentNode;
+            if (!container) return;
 
-                const imgSrc = a.image;
-                const isPlaceholder = (imgSrc === PLACEHOLDER_IMG);
-                const img = `<img src="${imgSrc}" alt="" loading="lazy" onerror="this.src='${PLACEHOLDER_IMG}'">`;
-                const imgWrap = `<div class="card-image-container">${img}<span class="card-source">${a.source}</span></div>`;
+            // Remove the broken <img> element
+            img.remove();
 
-                items.push(`
-                <article class="article-card" style="animation-delay:${Math.min(i * 0.03, 0.5)}s">
-                    ${imgWrap}
-                    <div class="card-body">
-                        <h2 class="card-headline"><a href="${a.link}" target="_blank" rel="noopener noreferrer">${a.title}</a></h2>
-                        <p class="card-summary">${a.summary}</p>
-                        <span class="card-date">${formatDate(a.date)}</span>
-                    </div>
-                </article>`);
+            // Build the branded watermark fallback:
+            // Dark charcoal (#14161A) background with centered gold mainspring
+            // logo at 40% size and 0.1 opacity, with brightness(0.7) filter
+            const placeholder = document.createElement('div');
+            placeholder.className = 'card-image-placeholder';
+            placeholder.innerHTML = MAINSPRING_SVG;
+            container.insertBefore(placeholder, container.firstChild);
+        }
 
-                // Randomized ad insertion: insert when we hit the next threshold
-                if (articleCount === nextAdAt && i + 1 < filtered.length) {
-                    adN++;
-                    items.push(nativeAdCardHtml(adN));
-                    nextAdAt += randBetween(AD_GAP_MIN, AD_GAP_MAX); // schedule the next one
+        // ══════════════════════════════════
+        //  Build Card HTML
+        // ══════════════════════════════════
+        function buildCardHtml(article, animIndex) {
+            const hasImage = article.image !== null;
+            const readBadge = isRead(article.link)
+                ? `<span class="card-read-badge">${READ_CHECK_SVG}</span>`
+                : '';
+
+            let imgContent;
+            if (hasImage) {
+                imgContent = `<img src="${escapeHtml(article.image)}" alt="" loading="lazy" onerror="handleImageError(this)">`;
+            } else {
+                imgContent = `<div class="card-image-placeholder">${MAINSPRING_SVG}</div>`;
+            }
+
+            return `
+            <article class="article-card" style="animation-delay:${Math.min(animIndex * 0.03, 0.5)}s">
+                <div class="card-image-container">
+                    ${imgContent}
+                    <span class="card-source">${escapeHtml(article.source)}</span>
+                    ${readBadge}
+                </div>
+                <div class="card-body">
+                    <h2 class="card-headline"><a href="${escapeHtml(article.link)}" target="_blank" rel="noopener noreferrer" data-track-read="${escapeHtml(article.link)}">${escapeHtml(article.title)}</a></h2>
+                    <p class="card-summary">${escapeHtml(article.summary)}</p>
+                    <span class="card-date">${formatDate(article.date)}</span>
+                </div>
+            </article>`;
+        }
+
+        // ══════════════════════════════════
+        //  Append Next Page of Articles
+        // ══════════════════════════════════
+        function appendNextPage() {
+            const grid = document.getElementById('articlesGrid');
+            const btn = document.getElementById('loadMoreBtn');
+            const start = displayedCount;
+            const end = Math.min(start + PAGE_SIZE, filteredArticles.length);
+            const fragment = [];
+
+            let localArticleCount = 0;
+
+            for (let i = start; i < end; i++) {
+                const article = filteredArticles[i];
+                localArticleCount++;
+                displayedCount++;
+
+                fragment.push(buildCardHtml(article, localArticleCount));
+
+                // Ad insertion logic: track total cards displayed for ad spacing
+                if (displayedCount === nextAdAt && i + 1 < filteredArticles.length) {
+                    adCounter++;
+                    fragment.push(nativeAdCardHtml(adCounter));
+                    nextAdAt += randBetween(AD_GAP_MIN, AD_GAP_MAX);
+                }
+            }
+
+            grid.insertAdjacentHTML('beforeend', fragment.join(''));
+
+            // Attach read-tracking to newly added links
+            grid.querySelectorAll('a[data-track-read]').forEach(link => {
+                if (!link._trackBound) {
+                    link._trackBound = true;
+                    link.addEventListener('click', function() {
+                        const url = this.dataset.trackRead;
+                        markAsRead(url);
+                        // Add the checkmark badge to the parent card
+                        const card = this.closest('.article-card');
+                        if (card && !card.querySelector('.card-read-badge')) {
+                            const imgContainer = card.querySelector('.card-image-container');
+                            if (imgContainer) {
+                                const badge = document.createElement('span');
+                                badge.className = 'card-read-badge';
+                                badge.innerHTML = READ_CHECK_SVG;
+                                imgContainer.appendChild(badge);
+                            }
+                        }
+                    });
                 }
             });
 
-            grid.innerHTML = items.join('');
+            // Update button state
+            if (displayedCount >= filteredArticles.length) {
+                btn.textContent = 'All Watch News Loaded';
+                btn.classList.add('exhausted');
+            } else {
+                btn.textContent = 'Load More Watch News';
+                btn.classList.remove('exhausted');
+            }
         }
+
+        // ══════════════════════════════════
+        //  Load More Button
+        // ══════════════════════════════════
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const loadMoreSpinner = document.getElementById('loadMoreSpinner');
+
+        loadMoreBtn.addEventListener('click', () => {
+            if (displayedCount >= filteredArticles.length) return;
+
+            // Show spinner, hide button
+            loadMoreBtn.style.display = 'none';
+            loadMoreSpinner.classList.add('visible');
+
+            // Brief delay to show the winding animation, then render
+            setTimeout(() => {
+                appendNextPage();
+                loadMoreSpinner.classList.remove('visible');
+                loadMoreBtn.style.display = '';
+            }, 600);
+        });
 
         // ══════════════════════════════════
         //  Live Search
@@ -1070,7 +1381,7 @@
         let searchTimeout;
         document.getElementById('searchInput').addEventListener('input', () => {
             clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(renderArticles, 200);
+            searchTimeout = setTimeout(applyFiltersAndRender, 200);
         });
 
         // ══════════════════════════════════
