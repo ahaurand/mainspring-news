@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mainspring News — Watch News Aggregator</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="coil-icon.png">
+    <link rel="apple-touch-icon" href="coil-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- ═══ Google AdSense ═══ -->
     <!-- TODO: Replace ca-pub-XXXXXXXXXXXXXXXX with your actual AdSense publisher ID -->
@@ -22,17 +25,17 @@
         :root {
             --bg: #0A0B0D;
             --surface: #14161A;
-            --gold: #D4AF37;
-            --gold-hover: #C9A02E;
-            --gold-dim: rgba(212, 175, 55, 0.15);
+            --gold: #a87526;
+            --gold-hover: #926520;
+            --gold-dim: rgba(168, 117, 38, 0.15);
             --text: #E0E0E0;
             --text-muted: #7A7D85;
             --border: #1E2028;
-            --border-gold: rgba(212, 175, 55, 0.3);
+            --border-gold: rgba(168, 117, 38, 0.3);
             --skeleton: #1A1D24;
             --skeleton-shine: #22252E;
             --shadow: 0 1px 4px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
-            --shadow-hover: 0 8px 24px rgba(0,0,0,0.45), 0 2px 8px rgba(212,175,55,0.08);
+            --shadow-hover: 0 8px 24px rgba(0,0,0,0.45), 0 2px 8px rgba(168,117,38,0.08);
             --header-h: 140px;
         }
 
@@ -74,18 +77,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
             margin-bottom: 4px;
+            background: transparent;
+            padding: 0;
+            overflow: visible;
         }
 
-        .logo-spiral { flex-shrink: 0; }
-
-        .logo-text {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: clamp(24px, 4vw, 40px);
-            font-weight: 700;
-            letter-spacing: 0.14em;
-            color: var(--text);
+        .logo-img {
+            max-height: 80px;
+            width: auto;
+            display: block;
+            mix-blend-mode: screen;
         }
 
         .site-header .tagline {
@@ -312,7 +314,7 @@
             background: #101214;
         }
 
-        .card-image-container img {
+        .card-image-container > img {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
@@ -321,7 +323,7 @@
             transition: transform 0.4s ease;
         }
 
-        .article-card:hover .card-image-container img {
+        .article-card:hover .card-image-container > img {
             transform: scale(1.04);
         }
 
@@ -337,7 +339,7 @@
             padding: 4px 9px;
             border-radius: 4px;
             backdrop-filter: blur(6px);
-            border: 1px solid rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(168, 117, 38, 0.12);
             z-index: 2;
         }
 
@@ -350,7 +352,7 @@
             height: 24px;
             background: rgba(10, 11, 13, 0.82);
             backdrop-filter: blur(6px);
-            border: 1px solid rgba(212, 175, 55, 0.25);
+            border: 1px solid rgba(168, 117, 38, 0.25);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -370,17 +372,23 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             aspect-ratio: 16 / 9;
+            overflow: hidden;
             background: #14161A;
             display: flex;
             align-items: center;
             justify-content: center;
-            filter: brightness(0.7);
         }
 
-        .card-image-placeholder svg {
-            width: 40%;
-            height: 40%;
-            opacity: 0.1;
+        .card-image-placeholder img {
+            /* Reset: override any inherited card-image rules */
+            position: static;
+            width: auto;
+            height: 50%;
+            object-fit: contain;
+            opacity: 0.5;
+            mix-blend-mode: screen;
+            filter: brightness(0.7);
+            transition: none;
         }
 
         .card-body {
@@ -391,7 +399,7 @@
         }
 
         .card-headline {
-            font-family: 'Instrument Serif', Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 17.5px;
             font-weight: 400;
             line-height: 1.35;
@@ -476,7 +484,7 @@
         }
 
         .no-results h3 {
-            font-family: 'Instrument Serif', Georgia, serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 24px;
             margin-bottom: 8px;
             color: var(--text);
@@ -497,7 +505,7 @@
         }
 
         .static-page h2 {
-            font-family: 'Instrument Serif', Georgia, serif;
+            font-family: 'Cinzel', Georgia, serif;
             font-size: 32px;
             font-weight: 400;
             color: var(--text);
@@ -514,7 +522,7 @@
         }
 
         .static-page h3 {
-            font-family: 'Instrument Serif', Georgia, serif;
+            font-family: 'Cinzel', Georgia, serif;
             font-size: 22px;
             font-weight: 400;
             color: var(--text);
@@ -575,7 +583,7 @@
         /* ── Email Us Ghost Button ── */
         .email-cta {
             display: inline-block;
-            font-family: 'Instrument Serif', Georgia, serif;
+            font-family: 'Cinzel', Georgia, serif;
             font-size: 17px;
             font-weight: 400;
             letter-spacing: 0.06em;
@@ -592,7 +600,7 @@
         .email-cta:hover {
             background: var(--gold);
             color: var(--bg);
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 4px 20px rgba(168, 117, 38, 0.25);
             transform: translateY(-1px);
             border-bottom-color: var(--gold);
         }
@@ -606,7 +614,7 @@
         }
 
         .load-more-btn {
-            font-family: 'Instrument Serif', Georgia, serif;
+            font-family: 'Cinzel', Georgia, serif;
             font-size: 17px;
             font-weight: 400;
             letter-spacing: 0.06em;
@@ -622,7 +630,7 @@
         .load-more-btn:hover {
             background: var(--gold);
             color: var(--bg);
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 4px 20px rgba(168, 117, 38, 0.25);
             transform: translateY(-1px);
         }
 
@@ -646,12 +654,14 @@
             align-items: center;
             gap: 12px;
             padding: 20px 0 0;
+            background: transparent !important;
         }
 
         .load-more-spinner.visible { display: flex; }
 
         .load-more-spiral {
             animation: spin 1s linear infinite;
+            mix-blend-mode: screen;
         }
 
         .load-more-spinner-text {
@@ -683,7 +693,7 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s, visibility 0.3s, transform 0.2s;
-            box-shadow: 0 2px 14px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 2px 14px rgba(168, 117, 38, 0.3);
             z-index: 100;
         }
 
@@ -700,7 +710,7 @@
         .site-footer {
             text-align: center;
             padding: 28px 24px 36px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-top: 1px solid rgba(168, 117, 38, 0.2);
         }
 
         .footer-disclosure {
@@ -763,9 +773,7 @@
 
         @media (max-width: 640px) {
             .site-header { padding: 16px 16px 0; }
-            .logo-group { gap: 10px; }
-            .logo-spiral { width: 30px; height: 30px; }
-            .logo-text { font-size: 22px; }
+            .logo-img { max-height: 52px; }
             .site-header .tagline {
                 font-size: 8.5px;
                 letter-spacing: 0.14em;
@@ -802,12 +810,7 @@
     <!-- ═══ Sticky Header ═══ -->
     <header class="site-header">
         <div class="logo-group">
-            <svg class="logo-spiral" width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 18 C63 18, 74 27, 76 40 C78 53, 70 64, 58 67 C46 70, 35 63, 32 52 C29 41, 35 31, 45 28 C55 25, 63 31, 65 40 C67 49, 61 56, 53 58 C45 60, 39 55, 38 48 C37 41, 42 37, 48 37"
-                      stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                <circle cx="48" cy="37" r="2.5" fill="#D4AF37"/>
-            </svg>
-            <span class="logo-text">MAINSPRING NEWS</span>
+            <img class="logo-img" src="https://mainspring.news/full-logo.png" alt="Mainspring News">
         </div>
         <p class="tagline">News from around the world of watches, wound into one feed.</p>
         <nav class="site-nav">
@@ -849,11 +852,7 @@
             <div class="load-more-wrapper" id="loadMoreWrapper">
                 <button class="load-more-btn" id="loadMoreBtn">Load More Watch News</button>
                 <div class="load-more-spinner" id="loadMoreSpinner">
-                    <svg class="load-more-spiral" width="22" height="22" viewBox="0 0 100 100" fill="none">
-                        <path d="M50 18 C63 18, 74 27, 76 40 C78 53, 70 64, 58 67 C46 70, 35 63, 32 52 C29 41, 35 31, 45 28 C55 25, 63 31, 65 40 C67 49, 61 56, 53 58 C45 60, 39 55, 38 48 C37 41, 42 37, 48 37"
-                              stroke="#D4AF37" stroke-width="3" stroke-linecap="round" fill="none"/>
-                        <circle cx="48" cy="37" r="2.5" fill="#D4AF37"/>
-                    </svg>
+                    <img class="load-more-spiral" src="https://mainspring.news/coil-icon.png" alt="" width="22" height="22">
                     <span class="load-more-spinner-text">Winding&hellip;</span>
                 </div>
             </div>
@@ -995,8 +994,8 @@
         // Articles per page (pagination)
         const PAGE_SIZE = 36;
 
-        // Fallback placeholder: skeletonized mechanical movement macro
-        const PLACEHOLDER_IMG = 'https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?w=600&h=338&fit=crop&q=80';
+        // Fallback placeholder: branded coil icon
+        const PLACEHOLDER_IMG = 'https://mainspring.news/coil-icon.png';
 
         let allArticles = [];
         let filteredArticles = [];
@@ -1107,13 +1106,9 @@
         // ══════════════════════════════════
         //  SVG Templates
         // ══════════════════════════════════
-        const MAINSPRING_SVG = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 18 C63 18, 74 27, 76 40 C78 53, 70 64, 58 67 C46 70, 35 63, 32 52 C29 41, 35 31, 45 28 C55 25, 63 31, 65 40 C67 49, 61 56, 53 58 C45 60, 39 55, 38 48 C37 41, 42 37, 48 37"
-                  stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <circle cx="48" cy="37" r="2.5" fill="#D4AF37"/>
-        </svg>`;
+        const MAINSPRING_WATERMARK = `<img src="https://mainspring.news/coil-icon.png" alt="" draggable="false">`;
 
-        const READ_CHECK_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+        const READ_CHECK_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="#a87526" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 
         // ══════════════════════════════════
         //  Fetch Feeds
@@ -1234,31 +1229,16 @@
             const container = img.parentNode;
             if (!container) return;
 
-            // Prevent infinite loops: mark that we've already tried the fallback
-            if (img.dataset.fallbackAttempted) {
-                handleImageFinalFallback(img);
-                return;
-            }
-
-            // First failure: try the skeletonized movement placeholder
-            img.dataset.fallbackAttempted = 'true';
-            img.onerror = function() { handleImageFinalFallback(this); };
-            img.src = PLACEHOLDER_IMG;
-        }
-
-        function handleImageFinalFallback(img) {
-            const container = img.parentNode;
-            if (!container) return;
-
-            // Remove the broken <img> element
+            // Remove the broken <img> entirely — no src-swap attempts
+            // that could inherit the wrong .card-image-container > img styles
             img.remove();
 
-            // Build the branded watermark fallback:
-            // Dark charcoal (#14161A) background with centered gold mainspring
-            // logo at 40% size and 0.1 opacity, with brightness(0.7) filter
+            // Inject the centered placeholder div:
+            // #14161A background, flex-centered coil icon at 50% height,
+            // opacity 0.5, brightness(0.7), mix-blend-mode: screen
             const placeholder = document.createElement('div');
             placeholder.className = 'card-image-placeholder';
-            placeholder.innerHTML = MAINSPRING_SVG;
+            placeholder.innerHTML = MAINSPRING_WATERMARK;
             container.insertBefore(placeholder, container.firstChild);
         }
 
@@ -1275,7 +1255,7 @@
             if (hasImage) {
                 imgContent = `<img src="${escapeHtml(article.image)}" alt="" loading="lazy" onerror="handleImageError(this)">`;
             } else {
-                imgContent = `<div class="card-image-placeholder">${MAINSPRING_SVG}</div>`;
+                imgContent = `<div class="card-image-placeholder">${MAINSPRING_WATERMARK}</div>`;
             }
 
             return `
