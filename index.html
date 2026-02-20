@@ -1545,16 +1545,49 @@
 
         async function loadGlossary() {
             if (glossaryLoaded) return;
+
+            const container = document.getElementById('glossaryContainer');
+
+            // Show loading state
+            container.innerHTML = '<p class="glossary-no-results">Loading terms&hellip;</p>';
+
             try {
-                const res = await fetch('terms.json');
+                console.log('[Glossary] Fetching ./terms.json ...');
+                const res = await fetch('./terms.json');
+                console.log('[Glossary] Response status:', res.status, res.statusText);
+
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status} — ${res.statusText}`);
+                }
+
                 const data = await res.json();
-                allTerms = data.sort((a, b) => a.term.localeCompare(b.term));
+                console.log('[Glossary] Loaded', Array.isArray(data) ? data.length : 'non-array', 'entries');
+
+                // Validate the data shape
+                if (!Array.isArray(data)) {
+                    throw new Error('terms.json did not return an array');
+                }
+
+                // Filter out any entries missing required keys
+                allTerms = data
+                    .filter(t => t && typeof t.term === 'string' && typeof t.definition === 'string')
+                    .sort((a, b) => a.term.localeCompare(b.term));
+
+                console.log('[Glossary] Valid terms after filtering:', allTerms.length);
+
+                if (allTerms.length === 0) {
+                    throw new Error('No valid { term, definition } entries found in terms.json');
+                }
+
                 glossaryLoaded = true;
                 renderGlossary(allTerms);
             } catch (e) {
-                console.warn('Failed to load terms.json:', e);
-                document.getElementById('glossaryContainer').innerHTML =
-                    '<p class="glossary-no-results">Unable to load watch terms. Please try again later.</p>';
+                console.error('[Glossary] Failed to load:', e);
+                container.innerHTML =
+                    `<div class="glossary-no-results">
+                        <p>Unable to load watch terms. Please try again later.</p>
+                        <button class="load-more-btn" style="margin-top:16px;font-size:14px;padding:10px 28px;" onclick="glossaryLoaded=false;loadGlossary();">Retry</button>
+                    </div>`;
             }
         }
 
