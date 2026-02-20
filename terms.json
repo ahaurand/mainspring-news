@@ -1,0 +1,283 @@
+[
+  {
+    "term": "Annual Calendar",
+    "definition": "A complication that automatically adjusts for months with 30 or 31 days. You only need to reset it once a year (at the end of February)."
+  },
+  {
+    "term": "Applied Indices",
+    "definition": "Hour markers that are separate pieces attached to the dial, rather than being painted on."
+  },
+  {
+    "term": "Apropos (of nothing)",
+    "definition": "Often used in forums when showing off a watch that has nothing to do with the current thread."
+  },
+  {
+    "term": "Automatic",
+    "definition": "A mechanical watch that winds itself using a weighted rotor that spins as you move your wrist."
+  },
+  {
+    "term": "Balance Spring",
+    "definition": "Also known as a hairspring; the tiny spring that allows the balance wheel to oscillate at a fixed frequency."
+  },
+  {
+    "term": "Barrel",
+    "definition": "The cylindrical box containing the mainspring."
+  },
+  {
+    "term": "Beat Error",
+    "definition": "The difference in the duration of the 'tick' and the 'tock.' Ideally, it should be 0.0 ms."
+  },
+  {
+    "term": "Bezel",
+    "definition": "The ring surrounding the watch crystal. Can be fixed, rotating (for diving), or tachymetric."
+  },
+  {
+    "term": "Blued Steel",
+    "definition": "Steel that has been heated to roughly 290°C to create a deep blue protective oxide layer."
+  },
+  {
+    "term": "Boutique Edition",
+    "definition": "A watch only available at the brand’s official stores, not authorized dealers."
+  },
+  {
+    "term": "Bridge",
+    "definition": "A plate fixed to the mainplate that holds the gears of the movement in place."
+  },
+  {
+    "term": "Caliber",
+    "definition": "A specific movement model (e.g., the Omega Caliber 3861)."
+  },
+  {
+    "term": "Cathedral Hands",
+    "definition": "Hands with intricate metal latticework, resembling stained-glass windows."
+  },
+  {
+    "term": "Champlevé",
+    "definition": "An enamel technique where hollows are carved into the metal and filled with enamel."
+  },
+  {
+    "term": "Chronograph",
+    "definition": "A watch with a built-in stopwatch function."
+  },
+  {
+    "term": "Chronometer",
+    "definition": "A high-precision watch that has been tested and certified by an official body (like COSC)."
+  },
+  {
+    "term": "Column Wheel",
+    "definition": "A sophisticated, vertical-clutch component used in high-end chronographs for smoother button operation."
+  },
+  {
+    "term": "Complication",
+    "definition": "Any function on a watch beyond telling the time (e.g., date, moonphase, or minute repeater)."
+  },
+  {
+    "term": "Côtes de Genève",
+    "definition": "A decorative finishing technique featuring parallel 'Geneva Stripes.'"
+  },
+  {
+    "term": "Crown",
+    "definition": "The knob on the side used to wind the watch or set the time."
+  },
+  {
+    "term": "Cyclops",
+    "definition": "A small magnifying lens on the crystal, usually over the date window."
+  },
+  {
+    "term": "Dauphine Hands",
+    "definition": "Triangular, faceted hands that taper to a sharp point."
+  },
+  {
+    "term": "Deployment Clasp",
+    "definition": "A folding metal buckle that allows a strap to open without being fully detached."
+  },
+  {
+    "term": "Depth Rating",
+    "definition": "The measure of water resistance (e.g., 200m)."
+  },
+  {
+    "term": "Display Back",
+    "definition": "A transparent caseback (usually sapphire) that lets you see the movement."
+  },
+  {
+    "term": "Double-Domed",
+    "definition": "A crystal that is curved on both the top and bottom to prevent dial distortion."
+  },
+  {
+    "term": "Dress Watch",
+    "definition": "A simple, thin, elegant watch meant for formal wear."
+  },
+  {
+    "term": "Ebauche",
+    "definition": "A movement blank or partially assembled movement bought from a third party (like ETA or Sellita)."
+  },
+  {
+    "term": "End Link",
+    "definition": "The part of the metal bracelet that attaches to the watch case."
+  },
+  {
+    "term": "Escapement",
+    "definition": "The 'heartbeat' of the watch; the mechanism that regulates the release of energy from the mainspring."
+  },
+  {
+    "term": "Fauxtina",
+    "definition": "Artificial aging (like tan-colored lume) applied to a new watch to make it look 'vintage.'"
+  },
+  {
+    "term": "Finishing",
+    "definition": "The decorative work done to a movement (polishing, bevelling, graining)."
+  },
+  {
+    "term": "Flyback",
+    "definition": "A chronograph that can be reset to zero and restarted with a single push of a button."
+  },
+  {
+    "term": "Frequency",
+    "definition": "The speed at which the watch beats, usually measured in Vibrations Per Hour (VPH) or Hertz (Hz)."
+  },
+  {
+    "term": "Fumé",
+    "definition": "A dial finish that starts light in the center and darkens toward the edges."
+  },
+  {
+    "term": "Gasket",
+    "definition": "A rubber or plastic ring used to seal the watch against water or dust."
+  },
+  {
+    "term": "GMT",
+    "definition": "A complication that allows the user to track a second (or third) time zone via a 24-hour hand."
+  },
+  {
+    "term": "Grail",
+    "definition": "The one watch an enthusiast wants above all others."
+  },
+  {
+    "term": "Grand Feu",
+    "definition": "An enamel technique involving multiple firings at extremely high temperatures (800°C+)."
+  },
+  {
+    "term": "Guilloché",
+    "definition": "An intricate, engine-turned decorative pattern on a dial."
+  },
+  {
+    "term": "Hacking",
+    "definition": "A feature where the seconds hand stops when the crown is pulled out, allowing for precise time setting."
+  },
+  {
+    "term": "Heals",
+    "definition": "Small scratches on an acrylic crystal that can be buffed out with Polywatch."
+  },
+  {
+    "term": "Hesalite",
+    "definition": "The brand name for acrylic (plastic) crystals often found on vintage Speedmasters."
+  },
+  {
+    "term": "High Horology",
+    "definition": "The pinnacle of watchmaking, involving hand-finishing and complex movements."
+  },
+  {
+    "term": "Horology",
+    "definition": "The study and measurement of time."
+  },
+  {
+    "term": "In-House",
+    "definition": "A movement designed and manufactured by the brand itself, rather than sourced from a supplier."
+  },
+  {
+    "term": "Incabloc",
+    "definition": "A shock protection system for the balance wheel."
+  },
+  {
+    "term": "Integrated Bracelet",
+    "definition": "A design where the bracelet flows directly into the case without traditional lugs."
+  },
+  {
+    "term": "Jewels",
+    "definition": "Synthetic rubies used as bearings to reduce friction in a movement."
+  },
+  {
+    "term": "Jump Hour",
+    "definition": "A complication where the hour is displayed in a window and 'jumps' to the next digit exactly at the hour mark."
+  },
+  {
+    "term": "Karat",
+    "definition": "The measure of gold purity (18k gold is standard for luxury watches)."
+  },
+  {
+    "term": "Lépine",
+    "definition": "A pocket watch movement where the seconds hand is in line with the winding stem."
+  },
+  {
+    "term": "Ligne",
+    "definition": "A traditional unit of measurement for watch movements (1 ligne ≈ 2.25 mm)."
+  },
+  {
+    "term": "Lugs",
+    "definition": "The 'horns' on the case where the strap or bracelet is attached."
+  },
+  {
+    "term": "Lug-to-Lug",
+    "definition": "The distance from the tip of the top lug to the tip of the bottom lug."
+  },
+  {
+    "term": "Lume",
+    "definition": "Phosphorescent material (like Super-LumiNova) applied to hands and markers to glow in the dark."
+  },
+  {
+    "term": "Mainplate",
+    "definition": "The base plate on which all movement parts are mounted."
+  },
+  {
+    "term": "Mainspring",
+    "definition": "The coiled spring that provides the power for a mechanical watch."
+  },
+  {
+    "term": "Manual Wind",
+    "definition": "A watch that must be wound by hand via the crown."
+  },
+  {
+    "term": "Micro-Brand",
+    "definition": "A small, independent watch company, often producing in small batches."
+  },
+  {
+    "term": "Micro-Rotor",
+    "definition": "A small automatic winding rotor that is recessed into the movement to keep it thin."
+  },
+  {
+    "term": "Minute Repeater",
+    "definition": "A high-end complication that chimes the time using tiny hammers and gongs."
+  },
+  {
+    "term": "Moonphase",
+    "definition": "A complication that shows the current phase of the moon."
+  },
+  {
+    "term": "NATO Strap",
+    "definition": "A one-piece nylon strap that passes under the watch case."
+  },
+  {
+    "term": "Nivachrom",
+    "definition": "A non-magnetic alloy used for hairsprings."
+  },
+  {
+    "term": "Oyster",
+    "definition": "The name given to Rolex’s water-resistant case design."
+  },
+  {
+    "term": "Patek Philippe Seal",
+    "definition": "A proprietary quality mark used by Patek Philippe."
+  },
+  {
+    "term": "Perlage",
+    "definition": "A finishing pattern of small, overlapping circles, usually on the mainplate."
+  },
+  {
+    "term": "Perpetual Calendar",
+    "definition": "A calendar that accounts for months of varying lengths and leap years until the year 2100."
+  },
+  {
+    "term": "Power Reserve",
+    "definition": "The amount of time a watch will run after being fully wound."
+  },
+  {
+    "term":
