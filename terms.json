@@ -280,4 +280,119 @@
     "definition": "The amount of time a watch will run after being fully wound."
   },
   {
-    "term":
+    "term": "Pusher",
+    "definition": "A button on the side of the case (usually for chronographs)."
+  },
+  {
+    "term": "Quartz",
+    "definition": "A watch powered by a battery and regulated by a vibrating quartz crystal."
+  },
+  {
+    "term": "Quick-Set",
+    "definition": "A feature allowing the date to be changed independently of the time hands."
+  },
+  {
+    "term": "Radium",
+    "definition": "A radioactive luminous material used on vintage watches (no longer used for safety)."
+  },
+  {
+    "term": "Rattrapante",
+    "definition": "A 'split-seconds' chronograph with two seconds hands to time two simultaneous events."
+  },
+  {
+    "term": "Reference Number",
+    "definition": "The 'model number' of a specific watch."
+  },
+  {
+    "term": "Regulating",
+    "definition": "Adjusting the watch to run as accurately as possible."
+  },
+  {
+    "term": "Rehaut",
+    "definition": "The inner ring of the watch between the dial and the crystal."
+  },
+  {
+    "term": "Rotor",
+    "definition": "The oscillating weight in an automatic movement."
+  },
+  {
+    "term": "Sapphire Crystal",
+    "definition": "A highly scratch-resistant transparent material used to protect the dial."
+  },
+  {
+    "term": "Screw-Down Crown",
+    "definition": "A crown that screws into the case to ensure water resistance."
+  },
+  {
+    "term": "Small Seconds",
+    "definition": "A sub-dial that displays the seconds, rather than a central seconds hand."
+  },
+  {
+    "term": "SOTC",
+    "definition": "'State of the Collection'—a photo or post showing all the watches someone currently owns."
+  },
+  {
+    "term": "Spring Bar",
+    "definition": "The small, spring-loaded metal pin that holds the strap to the lugs."
+  },
+  {
+    "term": "Sunburst",
+    "definition": "A dial finish with fine lines radiating from the center, creating a metallic shimmer."
+  },
+  {
+    "term": "Super-LumiNova",
+    "definition": "The industry-standard non-radioactive luminous paint."
+  },
+  {
+    "term": "Tachymeter",
+    "definition": "A scale on a bezel used to calculate speed based on travel time."
+  },
+  {
+    "term": "Tang Buckle",
+    "definition": "A traditional pin-and-hole buckle (like a belt)."
+  },
+  {
+    "term": "Telemeter",
+    "definition": "A scale used to measure the distance of an object based on sound."
+  },
+  {
+    "term": "Tonneau",
+    "definition": "A watch case shaped like a barrel."
+  },
+  {
+    "term": "Tourbillon",
+    "definition": "A rotating cage housing the escapement, designed to counteract the effects of gravity on accuracy."
+  },
+  {
+    "term": "Tritium",
+    "definition": "A mildly radioactive gas used for lume; it glows consistently without needing a light charge."
+  },
+  {
+    "term": "Unidirectional Bezel",
+    "definition": "A bezel that only turns one way (counter-clockwise), used by divers to track oxygen."
+  },
+  {
+    "term": "Universal Genève",
+    "definition": "A famous, historically significant brand highly prized by collectors."
+  },
+  {
+    "term": "Vibrations Per Hour (VPH)",
+    "definition": "The frequency at which the watch beats."
+  },
+  {
+    "term": "Vignette",
+    "definition": "Another term for a Fumé dial."
+  },
+  {
+    "term": "Wheel",
+    "definition": "Another word for a gear."
+  },
+  {
+    "term": "WIS",
+    "definition": "'Watch Idiot Savant'—a self-deprecating term for a hardcore watch enthusiast."
+  },
+  {
+    "term": "World Timer",
+    "definition": "A complication showing the time in 24 major time zones simultaneously."
+  }
+]
