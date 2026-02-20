@@ -766,6 +766,133 @@
         }
 
         /* ═══════════════════════════════════
+           Watch Terms / Glossary
+           ═══════════════════════════════════ */
+        .glossary-page {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .glossary-page h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .glossary-page .page-rule {
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            border: none;
+            margin-bottom: 24px;
+        }
+
+        .glossary-intro {
+            font-size: 15px;
+            line-height: 1.75;
+            color: #D1D1D6;
+            margin-bottom: 28px;
+        }
+
+        .glossary-search-wrapper {
+            position: relative;
+            margin-bottom: 36px;
+        }
+
+        .glossary-search-wrapper .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #636366;
+            pointer-events: none;
+        }
+
+        .glossary-search {
+            width: 100%;
+            padding: 12px 18px 12px 44px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 13.5px;
+            color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .glossary-search::placeholder { color: #636366; }
+
+        .glossary-search:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-dim);
+        }
+
+        .glossary-letter-group {
+            margin-bottom: 32px;
+        }
+
+        .glossary-letter {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--gold);
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .glossary-term {
+            margin-bottom: 18px;
+            padding-left: 0;
+        }
+
+        .glossary-term-name {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .glossary-term-def {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #D1D1D6;
+        }
+
+        .glossary-no-results {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .glossary-footer-note {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .glossary-footer-note a {
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .glossary-footer-note a:hover {
+            border-bottom-color: var(--gold);
+        }
+
+        /* ═══════════════════════════════════
            Responsive
            ═══════════════════════════════════ */
         @media (max-width: 1024px) {
@@ -801,6 +928,8 @@
             .back-to-top { bottom: 20px; right: 20px; width: 38px; height: 38px; }
             .static-page { padding: 32px 16px 60px; }
             .static-page h2 { font-size: 26px; }
+            .glossary-page { padding: 32px 16px 60px; }
+            .glossary-page h2 { font-size: 26px; }
         }
 
         /* ── Animation ── */
@@ -820,6 +949,7 @@
         <p class="tagline">News from around the world of watches, wound into one feed.</p>
         <nav class="site-nav">
             <button class="nav-link active" data-page="news">News</button>
+            <button class="nav-link" data-page="watch-terms">Watch Terms</button>
             <button class="nav-link" data-page="about">About</button>
             <button class="nav-link" data-page="privacy">Privacy</button>
         </nav>
@@ -863,6 +993,27 @@
             </div>
         </div>
 
+    </section>
+
+    <!-- ═══ WATCH TERMS PAGE ═══ -->
+    <section class="page-section" id="page-watch-terms">
+        <div class="glossary-page">
+            <h2>Watch Terms</h2>
+            <hr class="page-rule">
+            <p class="glossary-intro">Welcome to our Watch Terms guide, a curated resource designed to help you navigate the language of movements, materials, and collector culture. While not an exhaustive industry encyclopedia, this list offers a helpful starting point for anyone looking to deepen their understanding of the horological world.</p>
+
+            <div class="glossary-search-wrapper">
+                <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="glossary-search" id="glossarySearch" placeholder="Search watch terms...">
+            </div>
+
+            <div id="glossaryContainer"></div>
+
+            <p class="glossary-footer-note">Notice a term or phrase we missed? We'd love to hear from you. Please <a href="mailto:mainspring.watchnews@gmail.com?subject=Watch Terms Suggestion - Mainspring News" target="_blank" rel="noopener noreferrer">contact us</a> to suggest additions or revisions.</p>
+        </div>
     </section>
 
     <!-- ═══ ABOUT PAGE ═══ -->
@@ -960,6 +1111,8 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-links">
+            <button class="footer-link" data-page="watch-terms">Watch Terms</button>
+            <span class="footer-link-sep">&middot;</span>
             <button class="footer-link" data-page="about">About</button>
             <span class="footer-link-sep">&middot;</span>
             <button class="footer-link" data-page="privacy">Privacy</button>
@@ -1046,6 +1199,9 @@
             });
             pageSections.forEach(s => s.classList.toggle('active', s.id === `page-${target}`));
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Lazy-load glossary data on first visit
+            if (target === 'watch-terms') loadGlossary();
         }
 
         navLinks.forEach(link => {
@@ -1379,6 +1535,79 @@
 
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ══════════════════════════════════
+        //  Watch Terms / Glossary
+        // ══════════════════════════════════
+        let allTerms = [];
+        let glossaryLoaded = false;
+
+        async function loadGlossary() {
+            if (glossaryLoaded) return;
+            try {
+                const res = await fetch('terms.json');
+                const data = await res.json();
+                allTerms = data.sort((a, b) => a.term.localeCompare(b.term));
+                glossaryLoaded = true;
+                renderGlossary(allTerms);
+            } catch (e) {
+                console.warn('Failed to load terms.json:', e);
+                document.getElementById('glossaryContainer').innerHTML =
+                    '<p class="glossary-no-results">Unable to load watch terms. Please try again later.</p>';
+            }
+        }
+
+        function renderGlossary(terms) {
+            const container = document.getElementById('glossaryContainer');
+
+            if (terms.length === 0) {
+                container.innerHTML = '<p class="glossary-no-results">No matching terms found.</p>';
+                return;
+            }
+
+            // Group by first letter
+            const groups = {};
+            terms.forEach(t => {
+                const letter = t.term.charAt(0).toUpperCase();
+                if (!groups[letter]) groups[letter] = [];
+                groups[letter].push(t);
+            });
+
+            const letters = Object.keys(groups).sort();
+            let html = '';
+
+            letters.forEach(letter => {
+                html += `<div class="glossary-letter-group">`;
+                html += `<h3 class="glossary-letter">${letter}</h3>`;
+                groups[letter].forEach(t => {
+                    html += `<div class="glossary-term">`;
+                    html += `<div class="glossary-term-name">${escapeHtml(t.term)}</div>`;
+                    html += `<div class="glossary-term-def">${escapeHtml(t.definition)}</div>`;
+                    html += `</div>`;
+                });
+                html += `</div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Glossary search
+        let glossarySearchTimeout;
+        document.getElementById('glossarySearch').addEventListener('input', (e) => {
+            clearTimeout(glossarySearchTimeout);
+            glossarySearchTimeout = setTimeout(() => {
+                const query = e.target.value.toLowerCase().trim();
+                if (!query) {
+                    renderGlossary(allTerms);
+                    return;
+                }
+                const filtered = allTerms.filter(t =>
+                    t.term.toLowerCase().includes(query) ||
+                    t.definition.toLowerCase().includes(query)
+                );
+                renderGlossary(filtered);
+            }, 150);
         });
 
         // ══════════════════════════════════
