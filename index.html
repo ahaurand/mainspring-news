@@ -2043,36 +2043,25 @@
                 if (!res.ok) throw new Error(`HTTP ${res.status} — ${res.statusText}`);
                 const data = await res.json();
 
-                // ── Active Poll ──────────────────────────────────────
-                const active = data.activePoll || null;
+                // polls.json is a flat array of poll objects, each with a "status" field
+                const pollsArray = Array.isArray(data) ? data : [];
 
-                if (active && active.embedUrl && active.embedUrl.trim()) {
-                    // Primary path: build the strawpoll-embed wrapper around an iframe
-                    // whose src is the /embed/ URL from polls.json.
-                    // widget.js (loaded in <head>) will auto-resize the iframe.
+                // ── Active Poll ──────────────────────────────────────
+                // Find the first poll marked "active"
+                const activePoll = pollsArray.find(p => p.status === 'active') || null;
+                console.log('Active poll found:', activePoll);
+
+                if (activePoll && activePoll.embedUrl && activePoll.embedUrl.trim()) {
                     shell.innerHTML = `
                         <div class="strawpoll-embed">
                             <iframe
-                                src="${escapeHtml(active.embedUrl)}"
+                                src="${escapeHtml(activePoll.embedUrl)}"
                                 width="100%"
-                                height="523"
-                                allow="clipboard-write; encrypted-media; fullscreen"
-                                scrolling="yes"
-                                style="border:none;display:block;">
+                                scrolling="no"
+                                allowtransparency="true"
+                                style="height:600px;border:none;display:block;">
                             </iframe>
                         </div>`;
-                } else if (active && active.embedCode && active.embedCode.trim()) {
-                    // Legacy fallback: inject raw embedCode HTML as-is
-                    shell.innerHTML = active.embedCode;
-
-                    // Make any injected iframes responsive
-                    shell.querySelectorAll('iframe').forEach(f => {
-                        f.style.cssText += 'width:100%;border:none;display:block;';
-                        f.removeAttribute('width');
-                        const declaredH = f.getAttribute('height') || '523';
-                        f.style.minHeight = `${parseInt(declaredH, 10)}px`;
-                        f.setAttribute('scrolling', 'yes');
-                    });
                 } else {
                     shell.innerHTML = `
                         <div class="poll-state">
@@ -2085,10 +2074,11 @@
                 }
 
                 // ── Past Polls ───────────────────────────────────────
-                const past = Array.isArray(data.pastPolls) ? data.pastPolls : [];
+                // Collect all polls marked "archived"
+                const archivedPolls = pollsArray.filter(p => p.status === 'archived');
 
-                if (past.length > 0) {
-                    pastList.innerHTML = past.map(p => {
+                if (archivedPolls.length > 0) {
+                    pastList.innerHTML = archivedPolls.map(p => {
                         const meta = [p.date, p.votes ? `${p.votes} votes` : '']
                             .filter(Boolean).join(' · ');
                         return `
