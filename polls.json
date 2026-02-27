@@ -3,14 +3,14 @@
     "id": 1,
     "status": "active",
     "question": "What is Rolex most likely to announce at Watches and Wonders 2026?",
-    "embedUrl": "https://strawpoll.com/BDyNzdVk8yR",
+    "embedUrl": "https://strawpoll.com/embed/BDyNzdVk8yR",
     "description": "Rolex Watches and Wonders Predictions"
   },
   {
     "id": 2,
     "status": "archived",
     "question": "GMT Poll - Flyer v. Office",
-    "resultsUrl": "https://strawpoll.com/3RnYXeWBpye",
+    "resultsUrl": "https://strawpoll.com/embed/3RnYXeWBpye",
     "description": "Flyer (true) or office (caller) GMT? Which do you prefer?"
   }
 ]
