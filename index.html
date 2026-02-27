@@ -1067,8 +1067,11 @@
         .strawpoll-embed iframe {
             width: 100% !important;
             max-width: 100%;
+            min-height: 500px;
             border: none;
             display: block;
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* ── Poll State (loading / empty / error) ── */
@@ -2057,9 +2060,9 @@
                             <iframe
                                 src="${escapeHtml(activePoll.embedUrl)}"
                                 width="100%"
-                                scrolling="no"
+                                scrolling="yes"
                                 allowtransparency="true"
-                                style="height:600px;border:none;display:block;">
+                                style="height:600px;min-height:500px;border:none;display:block;overflow-y:auto;">
                             </iframe>
                         </div>`;
                 } else {
