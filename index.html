@@ -16,6 +16,9 @@
     <!-- TODO: Replace ca-pub-XXXXXXXXXXXXXXXX with your actual AdSense publisher ID -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 
+    <!-- ═══ Strawpoll Widget ═══ -->
+    <script async src="https://cdn.strawpoll.com/dist/widgets.js" charset="utf-8"></script>
+
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -105,6 +108,7 @@
         .site-nav {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 2px;
         }
 
@@ -926,7 +930,11 @@
                 letter-spacing: 0.14em;
                 margin-bottom: 10px;
             }
-            .nav-link { font-size: 10.5px; padding: 7px 12px; }
+            .nav-link { font-size: 10px; padding: 6px 10px; }
+            .polls-page { padding: 32px 16px 60px; }
+            .polls-page h2 { font-size: 26px; }
+            .poll-iframe-shell,
+            .poll-iframe-shell iframe { min-height: 360px; }
             .articles-grid,
             .skeleton-grid {
                 grid-template-columns: 1fr;
@@ -947,6 +955,249 @@
             .glossary-page h2 { font-size: 26px; }
         }
 
+        /* ═══════════════════════════════════
+           Polls Page
+           ═══════════════════════════════════ */
+        .polls-page {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .polls-page h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .polls-page .page-rule {
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            border: none;
+            margin-bottom: 28px;
+        }
+
+        .polls-intro {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            letter-spacing: 0.01em;
+        }
+
+        /* ── Live Poll Container ── */
+        .poll-live-wrap {
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            background: var(--surface);
+            overflow: hidden;
+            margin-bottom: 52px;
+            box-shadow: 0 2px 24px rgba(212, 175, 55, 0.07), var(--shadow);
+            transition: border-color 0.3s;
+        }
+
+        .poll-live-wrap:hover {
+            border-color: rgba(212, 175, 55, 0.55);
+        }
+
+        .poll-live-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 20px 13px;
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .poll-live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 7px rgba(212, 175, 55, 0.65);
+            animation: pollPulse 2.2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pollPulse {
+            0%, 100% { opacity: 1;    box-shadow: 0 0 7px  rgba(212, 175, 55, 0.65); }
+            50%       { opacity: 0.5; box-shadow: 0 0 14px rgba(212, 175, 55, 0.2);  }
+        }
+
+        .poll-live-label {
+            font-size: 9.5px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* ── Responsive iframe shell ──
+           Uses min-height so short embeds still look intentional;
+           the injected iframe overrides with its own height attribute.     */
+        .poll-iframe-shell {
+            position: relative;
+            width: 100%;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .poll-iframe-shell iframe {
+            width: 100%;
+            min-height: 480px;
+            border: none;
+            display: block;
+            flex: 1;
+            /* iOS Safari fix: allow iframe to scroll internally */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Strawpoll embed wrapper — centred, capped at 640px, full-width on mobile */
+        .strawpoll-embed {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .strawpoll-embed iframe {
+            width: 100% !important;
+            max-width: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* ── Poll State (loading / empty / error) ── */
+        .poll-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 60px 24px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .poll-state-icon {
+            color: var(--gold);
+            opacity: 0.55;
+        }
+
+        .poll-state-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .poll-loading-dots {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+        }
+
+        .poll-loading-dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.35;
+            animation: dotBounce 1.4s ease-in-out infinite;
+        }
+
+        .poll-loading-dots span:nth-child(2) { animation-delay: 0.18s; }
+        .poll-loading-dots span:nth-child(3) { animation-delay: 0.36s; }
+
+        @keyframes dotBounce {
+            0%, 80%, 100% { opacity: 0.35; transform: scale(0.85); }
+            40%            { opacity: 1;    transform: scale(1.2);  }
+        }
+
+        /* ── Past Polls Archive ── */
+        .polls-past-heading {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 19px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .polls-past-rule {
+            display: block;
+            width: 28px;
+            height: 1px;
+            background: var(--gold);
+            border: none;
+            opacity: 0.55;
+            margin-bottom: 20px;
+        }
+
+        .polls-past-empty {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .past-polls-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .past-poll-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: border-color 0.22s, background 0.22s;
+        }
+
+        .past-poll-item:hover {
+            border-color: var(--border-gold);
+            background: #17191f;
+        }
+
+        .past-poll-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .past-poll-title {
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.45;
+        }
+
+        .past-poll-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 3px;
+            letter-spacing: 0.02em;
+        }
+
+        .past-poll-chevron {
+            color: var(--gold);
+            opacity: 0.6;
+            flex-shrink: 0;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .past-poll-item:hover .past-poll-chevron {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
         /* ── Animation ── */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(10px); }
@@ -964,6 +1215,7 @@
         <p class="tagline">News from around the world of watches, wound into one feed.</p>
         <nav class="site-nav">
             <button class="nav-link active" data-page="news">News</button>
+            <button class="nav-link" data-page="polls">Polls</button>
             <button class="nav-link" data-page="watch-terms">Watch Terms</button>
             <button class="nav-link" data-page="about">About</button>
             <button class="nav-link" data-page="privacy">Privacy</button>
@@ -1008,6 +1260,39 @@
             </div>
         </div>
 
+    </section>
+
+    <!-- ═══ POLLS PAGE ═══ -->
+    <section class="page-section" id="page-polls">
+        <div class="polls-page">
+            <h2>Mainspring Polls</h2>
+            <hr class="page-rule">
+            <p class="polls-intro">Voice your opinion on all things watch related. Real-time results updated with every vote.</p>
+
+            <!-- ── Active Poll ── -->
+            <div class="poll-live-wrap">
+                <div class="poll-live-header">
+                    <span class="poll-live-dot"></span>
+                    <span class="poll-live-label">Live Poll</span>
+                </div>
+                <div class="poll-iframe-shell" id="pollIframeShell">
+                    <!-- Loading state — replaced by JS once polls.json is fetched -->
+                    <div class="poll-state" id="pollLoading">
+                        <div class="poll-loading-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <p class="poll-state-text">Loading active poll&hellip;</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Past Polls Archive ── -->
+            <h3 class="polls-past-heading">Past Polls</h3>
+            <hr class="polls-past-rule">
+            <ul class="past-polls-list" id="pastPollsList">
+                <!-- Populated by JS from polls.json → pastPolls[] -->
+            </ul>
+        </div>
     </section>
 
     <!-- ═══ WATCH TERMS PAGE ═══ -->
@@ -1221,8 +1506,9 @@
             pageSections.forEach(s => s.classList.toggle('active', s.id === `page-${target}`));
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Lazy-load glossary data on first visit
+            // Lazy-load page data on first visit
             if (target === 'watch-terms') loadGlossary();
+            if (target === 'polls')       loadPolls();
         }
 
         navLinks.forEach(link => {
@@ -1735,6 +2021,113 @@
                 renderGlossary(filtered);
             }, 150);
         });
+
+        // ══════════════════════════════════
+        //  Polls
+        // ══════════════════════════════════
+        let pollsLoaded = false;
+
+        async function loadPolls() {
+            if (pollsLoaded) return;
+
+            const shell    = document.getElementById('pollIframeShell');
+            const pastList = document.getElementById('pastPollsList');
+
+            // SVG icons used in state cards
+            const ICON_EMPTY = `<svg class="poll-state-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`;
+            const ICON_ERROR = `<svg class="poll-state-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+            const CHEVRON   = `<svg class="past-poll-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+
+            try {
+                const res = await fetch('./polls.json');
+                if (!res.ok) throw new Error(`HTTP ${res.status} — ${res.statusText}`);
+                const data = await res.json();
+
+                // ── Active Poll ──────────────────────────────────────
+                const active = data.activePoll || null;
+
+                if (active && active.embedUrl && active.embedUrl.trim()) {
+                    // Primary path: build the strawpoll-embed wrapper around an iframe
+                    // whose src is the /embed/ URL from polls.json.
+                    // widget.js (loaded in <head>) will auto-resize the iframe.
+                    shell.innerHTML = `
+                        <div class="strawpoll-embed">
+                            <iframe
+                                src="${escapeHtml(active.embedUrl)}"
+                                width="100%"
+                                height="523"
+                                allow="clipboard-write; encrypted-media; fullscreen"
+                                scrolling="yes"
+                                style="border:none;display:block;">
+                            </iframe>
+                        </div>`;
+                } else if (active && active.embedCode && active.embedCode.trim()) {
+                    // Legacy fallback: inject raw embedCode HTML as-is
+                    shell.innerHTML = active.embedCode;
+
+                    // Make any injected iframes responsive
+                    shell.querySelectorAll('iframe').forEach(f => {
+                        f.style.cssText += 'width:100%;border:none;display:block;';
+                        f.removeAttribute('width');
+                        const declaredH = f.getAttribute('height') || '523';
+                        f.style.minHeight = `${parseInt(declaredH, 10)}px`;
+                        f.setAttribute('scrolling', 'yes');
+                    });
+                } else {
+                    shell.innerHTML = `
+                        <div class="poll-state">
+                            ${ICON_EMPTY}
+                            <p class="poll-state-text">
+                                No active poll at the moment.<br>
+                                Check back soon — a new one is on the way.
+                            </p>
+                        </div>`;
+                }
+
+                // ── Past Polls ───────────────────────────────────────
+                const past = Array.isArray(data.pastPolls) ? data.pastPolls : [];
+
+                if (past.length > 0) {
+                    pastList.innerHTML = past.map(p => {
+                        const meta = [p.date, p.votes ? `${p.votes} votes` : '']
+                            .filter(Boolean).join(' · ');
+                        return `
+                        <li>
+                            <a class="past-poll-item"
+                               href="${escapeHtml(p.resultsUrl || '#')}"
+                               target="${p.resultsUrl ? '_blank' : '_self'}"
+                               rel="noopener noreferrer">
+                                <div class="past-poll-text">
+                                    <div class="past-poll-title">${escapeHtml(p.title || 'Untitled Poll')}</div>
+                                    ${meta ? `<div class="past-poll-meta">${escapeHtml(meta)}</div>` : ''}
+                                </div>
+                                ${CHEVRON}
+                            </a>
+                        </li>`;
+                    }).join('');
+                } else {
+                    pastList.innerHTML = `<li><p class="polls-past-empty">No past polls yet — results will appear here after each poll closes.</p></li>`;
+                }
+
+                pollsLoaded = true;
+
+            } catch (err) {
+                console.error('[Polls] Failed to load polls.json:', err);
+                shell.innerHTML = `
+                    <div class="poll-state">
+                        ${ICON_ERROR}
+                        <p class="poll-state-text">
+                            Unable to load the current poll.<br>Please try again shortly.
+                        </p>
+                        <button class="load-more-btn"
+                                style="font-size:13px;padding:10px 28px;margin-top:4px;"
+                                onclick="pollsLoaded=false;loadPolls();">
+                            Retry
+                        </button>
+                    </div>`;
+                pastList.innerHTML = '';
+            }
+        }
 
         // ══════════════════════════════════
         //  Init
