@@ -431,10 +431,25 @@
             flex: 1;
         }
 
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
         .card-date {
             font-size: 10px;
             color: #86868B;
             letter-spacing: 0.04em;
+        }
+
+        .card-read-time {
+            font-size: 10px;
+            color: #E0E0E0;
+            letter-spacing: 0.04em;
+            opacity: 0.55;
+            white-space: nowrap;
         }
 
         /* ═══════════════════════════════════
@@ -1040,6 +1055,9 @@
                 <li>Revolution</li>
                 <li>Quill &amp; Pad</li>
                 <li>WatchProSite</li>
+                <li>Gear Patrol</li>
+                <li>Wrist Enthusiast</li>
+                <li>Watches Magazine</li>
             </ul>
             <p>All content remains the property of its original authors and publishers. Mainspring News links directly to original articles and does not reproduce full-text content.</p>
 
@@ -1140,7 +1158,10 @@
             { name: 'WatchTime',             url: 'https://www.watchtime.com/feed/' },
             { name: 'Revolution',            url: 'https://revolutionwatch.com/feed/' },
             { name: 'Quill & Pad',           url: 'https://quillandpad.com/feed/' },
-            { name: 'WatchProSite',          url: 'https://www.watchprosite.com/rss/' }
+            { name: 'WatchProSite',          url: 'https://www.watchprosite.com/rss/' },
+            { name: 'Gear Patrol',           url: 'https://www.gearpatrol.com/watches/' },
+            { name: 'Wrist Enthusiast',      url: 'https://www.wristenthusiast.com/latest' },
+            { name: 'Watches Magazine',      url: 'https://www.watches-news.com/news/' }
         ];
 
         const RSS2JSON_BASE = 'https://api.rss2json.com/v1/api.json?rss_url=';
@@ -1264,6 +1285,74 @@
             return div.innerHTML;
         }
 
+        // Deterministic hash → float 0..1 from any string (no randomness per render)
+        function hashFloat(str) {
+            let h = 0;
+            for (let i = 0; i < str.length; i++) {
+                h = Math.imul(31, h) + str.charCodeAt(i) | 0;
+            }
+            return Math.abs(h) / 2147483647;
+        }
+
+        // Per-source realistic read-time ranges [min, max] in minutes.
+        // Used when only a snippet is available (no full content:encoded body).
+        const SOURCE_READ_RANGES = {
+            'Hodinkee':              [5, 10],
+            'Worn & Wound':          [4,  7],
+            'Fratello':              [4,  7],
+            'Monochrome':            [3,  6],
+            'A Blog to Watch':       [5,  9],
+            'Teddy Baldassarre':     [3,  6],
+            'Two Broke Watch Snobs': [4,  7],
+            'Oracle Time':           [3,  6],
+            'Time + Tide':           [3,  6],
+            'WatchTime':             [3,  6],
+            'Revolution':            [4,  7],
+            'Quill & Pad':           [7, 12],
+            'WatchProSite':          [3,  6],
+            'Gear Patrol':           [3,  6],
+            'Wrist Enthusiast':      [3,  5],
+            'Watches Magazine':      [2,  4],
+        };
+
+        // item   = raw rss2json item object
+        // source = feed name string (for source-based fallback ranges)
+        function calcReadTime(item, source) {
+            const WPM = 225;
+
+            // Prefer content:encoded (item.content) when it's richer than the snippet
+            const desc = item.description || '';
+            const full = item.content || '';
+            const richHtml = full.length > desc.length ? full : desc;
+
+            let wordCount = 0;
+            if (richHtml) {
+                const tmp = document.createElement('div');
+                tmp.innerHTML = richHtml;
+                const text = (tmp.textContent || tmp.innerText || '').trim();
+                wordCount = text.split(/\s+/).filter(Boolean).length;
+            }
+
+            // If we have a substantive body (≥ 100 words), trust the actual word count
+            if (wordCount >= 100) {
+                const mins = Math.max(1, Math.round(wordCount / WPM));
+                return mins >= 10 ? '10+ min read' : `${mins} min read`;
+            }
+
+            // Snippet-only path: use a source-specific range with a seeded estimate
+            // so the same article always shows the same value across renders.
+            const range = SOURCE_READ_RANGES[source] || [3, 6];
+            const seed = item.link || item.title || source;
+            const t = hashFloat(seed);
+            let mins = Math.round(range[0] + t * (range[1] - range[0]));
+
+            // If the snippet itself is long (> 200 chars of visible text), floor at 3 min
+            const snippetLen = desc.replace(/<[^>]*>/g, '').trim().length;
+            if (snippetLen > 200 && mins < 3) mins = 3;
+
+            return `${mins} min read`;
+        }
+
         // ══════════════════════════════════
         //  SVG Templates
         // ══════════════════════════════════
@@ -1285,6 +1374,7 @@
                             link: item.link || '',
                             image: extractImage(item, feed.name),
                             summary: createSummary(item.description),
+                            readTime: calcReadTime(item, feed.name),
                             source: feed.name,
                             date: item.pubDate || '',
                             timestamp: new Date(item.pubDate || 0).getTime()
@@ -1429,7 +1519,10 @@
                 <div class="card-body">
                     <h2 class="card-headline"><a href="${escapeHtml(article.link)}" target="_blank" rel="noopener noreferrer" data-track-read="${escapeHtml(article.link)}">${escapeHtml(article.title)}</a></h2>
                     <p class="card-summary">${escapeHtml(article.summary)}</p>
-                    <span class="card-date">${formatDate(article.date)}</span>
+                    <div class="card-footer">
+                        <span class="card-date">${formatDate(article.date)}</span>
+                        <span class="card-read-time">${article.readTime || '1 min read'}</span>
+                    </div>
                 </div>
             </article>`;
         }
