@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mainspring News — Latest</title>
-    <meta name="description" content="The latest original articles and editorials from Mainspring News — watch news wound for enthusiasts.">
+    <title>Mainspring News — Reviews</title>
+    <meta name="description" content="In-depth watch and accessory reviews from Mainspring News.">
 
     <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon">
     <link rel="icon" href="favicon.ico?v=2" type="image/x-icon">
@@ -18,12 +18,12 @@
     <link rel="stylesheet" href="site.css">
 
     <!-- ═══ Google AdSense ═══ -->
-    <!-- TODO: Replace ca-pub-XXXXXXXXXXXXXXXX with your actual publisher ID -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 
     <style>
         /* ═══════════════════════════════════
-           Latest Page — Page-Specific CSS
+           Reviews Page — Page-Specific CSS
+           (mirrors index.html exactly)
            ═══════════════════════════════════ */
         .latest-wrapper {
             max-width: 1320px;
@@ -31,7 +31,6 @@
             padding: 40px 24px 80px;
         }
 
-        /* ── Section Eyebrow label ── */
         .section-eyebrow {
             font-family: 'Cinzel', Georgia, serif;
             font-size: 10.5px;
@@ -52,7 +51,6 @@
             background: var(--border);
         }
 
-        /* ── Hero ── */
         .hero-section { margin-bottom: 36px; }
 
         .hero-link {
@@ -99,8 +97,7 @@
         }
 
         .hero-placeholder img {
-            height: 40%;
-            width: auto;
+            height: 40%; width: auto;
             opacity: 0.35;
             mix-blend-mode: screen;
             filter: brightness(0.7);
@@ -126,7 +123,7 @@
             border-radius: 4px;
         }
 
-        .hero-body { padding: 28px 32px 32px; }
+        .hero-body         { padding: 28px 32px 32px; }
 
         .hero-title {
             font-family: 'Cinzel', Georgia, serif;
@@ -153,13 +150,8 @@
             margin-bottom: 20px;
         }
 
-        .hero-date, .hero-read {
-            font-size: 11px;
-            color: #86868B;
-            letter-spacing: 0.04em;
-        }
-
-        .hero-sep { color: var(--border); font-size: 11px; }
+        .hero-date, .hero-read { font-size: 11px; color: #86868B; letter-spacing: 0.04em; }
+        .hero-sep              { color: var(--border); font-size: 11px; }
 
         .hero-cta {
             font-family: 'Cinzel', Georgia, serif;
@@ -170,14 +162,9 @@
             color: var(--gold);
         }
 
-        /* ── Ad slots ── */
         .ad-slot { margin: 0 0 36px; }
-        .ad-slot-sidebar {
-            grid-column: 3;
-            grid-row: 1 / 3;
-        }
 
-        /* ── Skeleton Loading ── */
+        /* Skeleton */
         .skeleton-hero {
             background: var(--surface);
             border-radius: 14px;
@@ -229,16 +216,15 @@
 
         .skeleton-card-body { padding: 16px; }
 
-        /* ── Responsive (page-specific) ── */
         @media (max-width: 1024px) { .skeleton-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
 
         @media (max-width: 640px) {
-            .latest-wrapper    { padding: 24px 16px 60px; }
-            .hero-image-wrap   { aspect-ratio: 16 / 9; }
-            .hero-body         { padding: 18px 18px 22px; }
-            .skeleton-grid     { grid-template-columns: 1fr; gap: 14px; }
-            .skeleton-hero-img { aspect-ratio: 16 / 9; }
-            .skeleton-hero-body{ padding: 18px; }
+            .latest-wrapper     { padding: 24px 16px 60px; }
+            .hero-image-wrap    { aspect-ratio: 16 / 9; }
+            .hero-body          { padding: 18px 18px 22px; }
+            .skeleton-grid      { grid-template-columns: 1fr; gap: 14px; }
+            .skeleton-hero-img  { aspect-ratio: 16 / 9; }
+            .skeleton-hero-body { padding: 18px; }
         }
     </style>
 </head>
@@ -253,9 +239,9 @@
         </div>
         <p class="tagline">Watch News and More, Wound for Enthusiasts</p>
         <nav class="site-nav">
-            <a class="nav-link active" href="index.html">Latest</a>
+            <a class="nav-link"        href="index.html">Latest</a>
             <a class="nav-link"        href="news.html">News</a>
-            <a class="nav-link"        href="reviews.html">Reviews</a>
+            <a class="nav-link active" href="reviews.html">Reviews</a>
             <a class="nav-link"        href="polls.html">Polls</a>
         </nav>
         <hr class="header-border">
@@ -265,7 +251,7 @@
     <main>
         <div class="latest-wrapper">
 
-            <!-- Skeleton (visible while content.json loads) -->
+            <!-- Skeleton -->
             <div id="contentSkeleton">
                 <div class="skeleton-hero">
                     <div class="skeleton-hero-img"></div>
@@ -282,23 +268,22 @@
                 </div>
             </div>
 
-            <!-- Hero (featured article injected by content.js) -->
+            <!-- Hero review (injected by content.js) -->
             <div id="contentHero"></div>
 
             <!-- Ad Slot — Below Hero -->
-            <div class="ad-placeholder ad-slot" id="ad-latest-hero">
+            <div class="ad-placeholder ad-slot" id="ad-reviews-hero">
                 <!-- INSERT ADSENSE IN-FEED UNIT HERE -->
                 <span class="ad-label">Advertisement</span>
             </div>
 
-            <!-- More Articles grid -->
-            <p class="section-eyebrow">More Articles</p>
+            <!-- More Reviews grid -->
+            <p class="section-eyebrow">More Reviews</p>
             <div class="articles-grid" id="contentGrid"></div>
 
         </div>
     </main>
 
-    <!-- Back to Top -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="18 15 12 9 6 15"></polyline>
@@ -322,15 +307,14 @@
 
     <script src="content.js"></script>
     <script>
-        // Back to top
         const backToTopBtn = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             backToTopBtn.classList.toggle('visible', window.scrollY > 400);
         }, { passive: true });
         backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // Render LATEST — pulls type:'article' items from content.json
-        renderContentPage('article');
+        // Render REVIEWS — pulls type:'review' items from content.json
+        renderContentPage('review');
     </script>
 </body>
 </html>

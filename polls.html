@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mainspring News — Polls</title>
+    <meta name="description" content="Vote in live watch polls and browse past results at Mainspring News.">
+
+    <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon">
+    <link rel="icon" href="favicon.ico?v=2" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="coil-icon.png?v=2">
+    <link rel="apple-touch-icon" href="coil-icon.png?v=2">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="site.css">
+
+    <!-- ═══ Google AdSense ═══ -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <!-- ═══ Strawpoll Widget ═══ -->
+    <script async src="https://cdn.strawpoll.com/dist/widgets.js" charset="utf-8"></script>
+
+    <style>
+        /* ═══════════════════════════════════
+           Polls Page — Page-Specific CSS
+           ═══════════════════════════════════ */
+        .polls-wrapper {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .polls-wrapper h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .page-rule {
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            border: none;
+            margin-bottom: 28px;
+        }
+
+        .polls-intro {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            letter-spacing: 0.01em;
+        }
+
+        /* ── Live Poll Container ── */
+        .poll-live-wrap {
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            background: var(--surface);
+            overflow: hidden;
+            margin-bottom: 52px;
+            box-shadow: 0 2px 24px rgba(212, 175, 55, 0.07), var(--shadow);
+            transition: border-color 0.3s;
+        }
+
+        .poll-live-wrap:hover {
+            border-color: rgba(212, 175, 55, 0.55);
+        }
+
+        .poll-live-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 20px 13px;
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .poll-live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 7px rgba(212, 175, 55, 0.65);
+            animation: pollPulse 2.2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pollPulse {
+            0%, 100% { opacity: 1;    box-shadow: 0 0 7px  rgba(212, 175, 55, 0.65); }
+            50%       { opacity: 0.5; box-shadow: 0 0 14px rgba(212, 175, 55, 0.2);  }
+        }
+
+        .poll-live-label {
+            font-size: 9.5px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .poll-iframe-shell {
+            position: relative;
+            width: 100%;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .poll-iframe-shell iframe {
+            width: 100%;
+            min-height: 480px;
+            border: none;
+            display: block;
+            flex: 1;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .strawpoll-embed {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .strawpoll-embed iframe {
+            width: 100% !important;
+            max-width: 100%;
+            min-height: 500px;
+            border: none;
+            display: block;
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* ── Poll State (loading / empty / error) ── */
+        .poll-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 60px 24px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .poll-state-icon {
+            color: var(--gold);
+            opacity: 0.55;
+        }
+
+        .poll-state-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .poll-loading-dots {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+        }
+
+        .poll-loading-dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.35;
+            animation: dotBounce 1.4s ease-in-out infinite;
+        }
+
+        .poll-loading-dots span:nth-child(2) { animation-delay: 0.18s; }
+        .poll-loading-dots span:nth-child(3) { animation-delay: 0.36s; }
+
+        @keyframes dotBounce {
+            0%, 80%, 100% { opacity: 0.35; transform: scale(0.85); }
+            40%            { opacity: 1;    transform: scale(1.2);  }
+        }
+
+        /* ── Past Polls Archive ── */
+        .polls-past-heading {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 19px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .polls-past-rule {
+            display: block;
+            width: 28px;
+            height: 1px;
+            background: var(--gold);
+            border: none;
+            opacity: 0.55;
+            margin-bottom: 20px;
+        }
+
+        .polls-past-empty {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .past-polls-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .past-poll-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: border-color 0.22s, background 0.22s;
+        }
+
+        .past-poll-item:hover {
+            border-color: var(--border-gold);
+            background: #17191f;
+        }
+
+        .past-poll-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .past-poll-title {
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.45;
+        }
+
+        .past-poll-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 3px;
+            letter-spacing: 0.02em;
+        }
+
+        .past-poll-chevron {
+            color: var(--gold);
+            opacity: 0.6;
+            flex-shrink: 0;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .past-poll-item:hover .past-poll-chevron {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        .retry-btn {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            color: var(--gold);
+            background: transparent;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 10px 28px;
+            cursor: pointer;
+            transition: background 0.25s, color 0.25s;
+            margin-top: 4px;
+        }
+
+        .retry-btn:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        @media (max-width: 640px) {
+            .polls-wrapper         { padding: 32px 16px 60px; }
+            .polls-wrapper h2      { font-size: 26px; }
+            .poll-iframe-shell,
+            .poll-iframe-shell iframe { min-height: 360px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ Header ═══ -->
+    <header class="site-header">
+        <div class="logo-group">
+            <a href="index.html">
+                <img class="logo-img" src="https://mainspring.news/full-logo.png" alt="Mainspring News">
+            </a>
+        </div>
+        <p class="tagline">Watch News and More, Wound for Enthusiasts</p>
+        <nav class="site-nav">
+            <a class="nav-link" href="index.html">Latest</a>
+            <a class="nav-link" href="news.html">News</a>
+            <a class="nav-link" href="reviews.html">Reviews</a>
+            <a class="nav-link active" href="polls.html">Polls</a>
+        </nav>
+        <hr class="header-border">
+    </header>
+
+    <!-- ═══ Main ═══ -->
+    <main>
+        <div class="polls-wrapper">
+            <h2>Mainspring Polls</h2>
+            <hr class="page-rule">
+            <p class="polls-intro">Voice your opinion on all things watch related. Real-time results updated with every vote.</p>
+
+            <!-- ── Active Poll ── -->
+            <div class="poll-live-wrap">
+                <div class="poll-live-header">
+                    <span class="poll-live-dot"></span>
+                    <span class="poll-live-label">Live Poll</span>
+                </div>
+                <div class="poll-iframe-shell" id="pollIframeShell">
+                    <div class="poll-state" id="pollLoading">
+                        <div class="poll-loading-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <p class="poll-state-text">Loading active poll&hellip;</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Past Polls Archive ── -->
+            <h3 class="polls-past-heading">Past Polls</h3>
+            <hr class="polls-past-rule">
+            <ul class="past-polls-list" id="pastPollsList">
+                <!-- Populated by JS from polls.json -->
+            </ul>
+        </div>
+    </main>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- ═══ Footer ═══ -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a class="footer-link" href="watch-terms.html">Watch Terms</a>
+            <span class="footer-link-sep">&middot;</span>
+            <a class="footer-link" href="about.html">About</a>
+            <span class="footer-link-sep">&middot;</span>
+            <a class="footer-link" href="privacy.html">Privacy</a>
+            <span class="footer-link-sep">&middot;</span>
+            <a class="footer-link" href="mailto:mainspring.watchnews@gmail.com?subject=Inquiry from Mainspring News" target="_blank" rel="noopener noreferrer">Contact</a>
+        </div>
+        <p class="footer-disclosure">This site uses Google AdSense to display advertisements.</p>
+        <p class="footer-copy">&copy; 2026 Mainspring News. All article content belongs to its respective publishers.</p>
+    </footer>
+
+    <script>
+        // ══════════════════════════════════
+        //  Helpers
+        // ══════════════════════════════════
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ══════════════════════════════════
+        //  Back to Top
+        // ══════════════════════════════════
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ══════════════════════════════════
+        //  Polls
+        // ══════════════════════════════════
+        const ICON_EMPTY = `<svg class="poll-state-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`;
+        const ICON_ERROR = `<svg class="poll-state-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+        const CHEVRON   = `<svg class="past-poll-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+
+        async function loadPolls() {
+            const shell    = document.getElementById('pollIframeShell');
+            const pastList = document.getElementById('pastPollsList');
+
+            try {
+                const res = await fetch('./polls.json');
+                if (!res.ok) throw new Error(`HTTP ${res.status} — ${res.statusText}`);
+                const data = await res.json();
+
+                const pollsArray = Array.isArray(data) ? data : [];
+                const activePoll = pollsArray.find(p => p.status === 'active') || null;
+
+                if (activePoll && activePoll.embedUrl && activePoll.embedUrl.trim()) {
+                    shell.innerHTML = `
+                        <div class="strawpoll-embed">
+                            <iframe
+                                src="${escapeHtml(activePoll.embedUrl)}"
+                                width="100%"
+                                scrolling="yes"
+                                allowtransparency="true"
+                                style="height:600px;min-height:500px;border:none;display:block;overflow-y:auto;">
+                            </iframe>
+                        </div>`;
+                } else {
+                    shell.innerHTML = `
+                        <div class="poll-state">
+                            ${ICON_EMPTY}
+                            <p class="poll-state-text">
+                                No active poll at the moment.<br>
+                                Check back soon — a new one is on the way.
+                            </p>
+                        </div>`;
+                }
+
+                const archivedPolls = pollsArray.filter(p => p.status === 'archived');
+
+                if (archivedPolls.length > 0) {
+                    pastList.innerHTML = archivedPolls.map(p => {
+                        const meta = [p.date, p.votes ? `${p.votes} votes` : '']
+                            .filter(Boolean).join(' · ');
+                        return `
+                        <li>
+                            <a class="past-poll-item"
+                               href="${escapeHtml(p.resultsUrl || '#')}"
+                               target="${p.resultsUrl ? '_blank' : '_self'}"
+                               rel="noopener noreferrer">
+                                <div class="past-poll-text">
+                                    <div class="past-poll-title">${escapeHtml(p.title || 'Untitled Poll')}</div>
+                                    ${meta ? `<div class="past-poll-meta">${escapeHtml(meta)}</div>` : ''}
+                                </div>
+                                ${CHEVRON}
+                            </a>
+                        </li>`;
+                    }).join('');
+                } else {
+                    pastList.innerHTML = `<li><p class="polls-past-empty">No past polls yet — results will appear here after each poll closes.</p></li>`;
+                }
+
+            } catch (err) {
+                console.error('[Polls] Failed to load polls.json:', err);
+                shell.innerHTML = `
+                    <div class="poll-state">
+                        ${ICON_ERROR}
+                        <p class="poll-state-text">
+                            Unable to load the current poll.<br>Please try again shortly.
+                        </p>
+                        <button class="retry-btn" onclick="loadPolls()">Retry</button>
+                    </div>`;
+                pastList.innerHTML = '';
+            }
+        }
+
+        loadPolls();
+    </script>
+</body>
+</html>

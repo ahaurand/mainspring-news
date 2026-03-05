@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "type": "article",
+    "status": "published",
+    "featured": true,
+    "title": "Example Featured Article Title",
+    "author": "Mainspring News",
+    "date": "2026-03-05",
+    "image": "",
+    "excerpt": "A short, compelling summary of the article — two or three sentences that draw the reader in. This appears in the hero card and in the news feed.",
+    "body": "<p>This is the full article body. Replace this with your actual article content in HTML format.</p><p>You can use standard HTML tags: <strong>bold</strong>, <em>italic</em>, headings, blockquotes, and images.</p><h2>A Section Heading</h2><p>Additional paragraphs of content go here. Each article lives in this JSON file and is rendered by article.html when a reader visits <code>article.html?id=1</code>.</p>",
+    "tags": ["horology", "featured"],
+    "readTime": "5 min read"
+  },
+  {
+    "id": 2,
+    "type": "article",
+    "status": "published",
+    "featured": false,
+    "title": "Example Second Article",
+    "author": "Mainspring News",
+    "date": "2026-02-28",
+    "image": "",
+    "excerpt": "A brief description of this article. Appears in the article grid below the hero on the Latest page and is also prepended to the News feed.",
+    "body": "<p>Full content for the second article goes here.</p>",
+    "tags": ["rolex", "sports-watch"],
+    "readTime": "4 min read"
+  },
+  {
+    "id": 3,
+    "type": "review",
+    "status": "published",
+    "featured": true,
+    "title": "Review: Example Watch Model",
+    "author": "Mainspring News",
+    "date": "2026-02-20",
+    "image": "",
+    "excerpt": "Our hands-on review of this watch after wearing it for two weeks. Here is what we found.",
+    "body": "<p>Review content goes here. Describe the watch in detail — movement, case, dial, bracelet, wearing experience.</p><h2>Verdict</h2><p>Summary of the review and final recommendation.</p>",
+    "tags": ["review", "tudor", "dive-watch"],
+    "readTime": "7 min read"
+  },
+  {
+    "id": 4,
+    "type": "review",
+    "status": "published",
+    "featured": false,
+    "title": "Review: Another Watch Model",
+    "author": "Mainspring News",
+    "date": "2026-02-10",
+    "image": "",
+    "excerpt": "A second review entry to populate the Reviews grid. Replace this with real review content.",
+    "body": "<p>Full review body goes here.</p>",
+    "tags": ["review", "seiko"],
+    "readTime": "6 min read"
+  }
+]

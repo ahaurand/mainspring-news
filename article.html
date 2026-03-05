@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mainspring News</title><!-- title replaced by JS once article loads -->
+
+    <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon">
+    <link rel="icon" href="favicon.ico?v=2" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="coil-icon.png?v=2">
+    <link rel="apple-touch-icon" href="coil-icon.png?v=2">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="site.css">
+
+    <!-- ═══ Google AdSense ═══ -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <style>
+        /* ═══════════════════════════════════
+           Article Reader — Page-Specific CSS
+           ═══════════════════════════════════ */
+        .article-wrapper {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* ── Back link ── */
+        .article-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 36px;
+            transition: color 0.2s;
+        }
+
+        .article-back:hover { color: var(--gold); }
+
+        /* ── Article Header ── */
+        .article-type-badge {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: var(--gold-dim);
+            border: 1px solid var(--border-gold);
+            border-radius: 4px;
+            padding: 4px 11px;
+            margin-bottom: 18px;
+        }
+
+        .article-title {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: clamp(1.7rem, 4vw, 2.6rem);
+            font-weight: 500;
+            line-height: 1.22;
+            color: var(--text);
+            margin-bottom: 18px;
+            letter-spacing: -0.01em;
+        }
+
+        .article-byline {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 12px;
+            color: #86868B;
+            letter-spacing: 0.04em;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .byline-sep { color: var(--border); }
+
+        /* ── Hero image ── */
+        .article-hero-img {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 36px;
+            aspect-ratio: 16 / 9;
+            background: var(--surface);
+        }
+
+        .article-hero-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ── Prose ── */
+        .article-prose {
+            font-size: 16px;
+            line-height: 1.85;
+            color: #D1D1D6;
+        }
+
+        .article-prose p            { margin-bottom: 22px; }
+        .article-prose h2           { font-family: 'Cinzel', Georgia, serif; font-size: 1.45rem; font-weight: 400; color: var(--text); margin: 40px 0 14px; }
+        .article-prose h3           { font-size: 1.1rem; font-weight: 600; color: var(--text); margin: 30px 0 10px; }
+        .article-prose a            { color: var(--gold); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .article-prose a:hover      { border-bottom-color: var(--gold); }
+        .article-prose img          { max-width: 100%; border-radius: 8px; margin: 28px 0; display: block; }
+        .article-prose blockquote   { border-left: 3px solid var(--gold); margin: 28px 0; padding: 6px 22px; color: var(--text-muted); font-style: italic; line-height: 1.7; }
+        .article-prose ul, .article-prose ol { margin: 0 0 22px 24px; }
+        .article-prose li           { margin-bottom: 8px; }
+        .article-prose strong       { color: var(--text); font-weight: 600; }
+        .article-prose hr           { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+        /* ── Ad slot mid-article ── */
+        .ad-mid {
+            margin: 36px 0;
+        }
+
+        /* ── Tags ── */
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 44px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .article-tag {
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 5px 13px;
+        }
+
+        /* ── Error / not found ── */
+        .article-error {
+            text-align: center;
+            padding: 80px 24px;
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .article-error a { color: var(--gold); text-decoration: none; }
+        .article-error a:hover { text-decoration: underline; }
+
+        /* ── Skeleton ── */
+        .skeleton-article {
+            animation: fadeUp 0.3s ease forwards;
+        }
+
+        .skeleton-line {
+            height: 14px;
+            border-radius: 6px;
+            background: var(--skeleton);
+            animation: pulse 1.8s cubic-bezier(0.4,0,0.6,1) infinite;
+            margin-bottom: 14px;
+        }
+
+        .skeleton-line.xl    { width: 85%; height: 38px; margin-bottom: 18px; }
+        .skeleton-line.lg    { width: 65%; height: 20px; }
+        .skeleton-line.full  { width: 100%; }
+        .skeleton-line.med   { width: 60%; }
+        .skeleton-line.short { width: 38%; height: 10px; }
+
+        .skeleton-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: var(--skeleton);
+            border-radius: 10px;
+            animation: pulse 1.8s cubic-bezier(0.4,0,0.6,1) infinite;
+            margin: 32px 0 36px;
+        }
+
+        @media (max-width: 640px) {
+            .article-wrapper { padding: 28px 16px 60px; }
+            .article-title   { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ Header ═══ -->
+    <header class="site-header">
+        <div class="logo-group">
+            <a href="index.html">
+                <img class="logo-img" src="https://mainspring.news/full-logo.png" alt="Mainspring News">
+            </a>
+        </div>
+        <p class="tagline">Watch News and More, Wound for Enthusiasts</p>
+        <nav class="site-nav">
+            <a class="nav-link" href="index.html">Latest</a>
+            <a class="nav-link" href="news.html">News</a>
+            <a class="nav-link" href="reviews.html">Reviews</a>
+            <a class="nav-link" href="polls.html">Polls</a>
+        </nav>
+        <hr class="header-border">
+    </header>
+
+    <!-- ═══ Main ═══ -->
+    <main>
+        <div class="article-wrapper">
+
+            <!-- Back navigation -->
+            <a class="article-back" href="javascript:history.back()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Back
+            </a>
+
+            <!-- Skeleton (visible while loading) -->
+            <div id="contentSkeleton" class="skeleton-article">
+                <div class="skeleton-line short"></div>
+                <div class="skeleton-line xl"></div>
+                <div class="skeleton-line lg"></div>
+                <div class="skeleton-img"></div>
+                <div class="skeleton-line full"></div>
+                <div class="skeleton-line full"></div>
+                <div class="skeleton-line med"></div>
+                <div class="skeleton-line full" style="margin-top:22px;"></div>
+                <div class="skeleton-line full"></div>
+                <div class="skeleton-line short"></div>
+            </div>
+
+            <!-- Article body (injected by content.js → renderArticlePage) -->
+            <div id="articleBody"></div>
+
+            <!-- Ad Slot — Mid Article (place inside prose via JS if desired) -->
+            <div class="ad-placeholder ad-mid" id="ad-article-mid" style="display:none;">
+                <!-- INSERT ADSENSE IN-ARTICLE UNIT HERE -->
+                <span class="ad-label">Advertisement</span>
+            </div>
+
+        </div>
+    </main>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- ═══ Footer ═══ -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a class="footer-link" href="watch-terms.html">Watch Terms</a>
+            <span class="footer-link-sep">&middot;</span>
+            <a class="footer-link" href="about.html">About</a>
+            <span class="footer-link-sep">&middot;</span>
+            <a class="footer-link" href="privacy.html">Privacy</a>
+            <span class="footer-link-sep">&middot;</span>
+            <a class="footer-link" href="mailto:mainspring.watchnews@gmail.com?subject=Inquiry from Mainspring News" target="_blank" rel="noopener noreferrer">Contact</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Mainspring News. All article content belongs to its respective publishers.</p>
+    </footer>
+
+    <script src="content.js"></script>
+    <script>
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Show mid-article ad once the article body is populated
+        renderArticlePage().then(() => {
+            const adEl = document.getElementById('ad-article-mid');
+            if (document.getElementById('articleBody').innerHTML && adEl) {
+                adEl.style.display = '';
+            }
+        });
+    </script>
+</body>
+</html>
