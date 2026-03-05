@@ -208,6 +208,17 @@
             backToTopBtn.classList.toggle('visible', window.scrollY > 400);
         }, { passive: true });
         backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Auto active nav
+        (function () {
+            var page = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-link').forEach(function (link) {
+                var href = link.getAttribute('href');
+                if (href && (href === page || (page === '' && href === 'index.html'))) {
+                    link.classList.add('active');
+                }
+            });
+        }());
     </script>
 </body>
 </html>
