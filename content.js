@@ -239,15 +239,33 @@ async function renderArticlePage() {
  */
 async function getOriginalArticlesAsRSSItems() {
     const all = await fetchContent();
-    return all.map(item => ({
-        title:     item.title  || '',
-        link:      `article.html?id=${item.id}`,
-        image:     item.image  || null,
-        summary:   item.excerpt || '',
-        readTime:  item.readTime || '5 min read',
-        source:    'Mainspring',
-        date:      item.date   || '',
-        timestamp: new Date(item.date || 0).getTime(),
-        _original: true   // flag so the news page can style these differently
-    }));
+    // Only surface items typed as "article" in the news feed (not reviews)
+    return all
+        .filter(item => item.type === 'article')
+        .map(item => ({
+            title:     item.title  || '',
+            link:      `article.html?id=${item.id}`,
+            image:     item.image  || null,
+            summary:   item.excerpt || '',
+            readTime:  item.readTime || '5 min read',
+            source:    'Mainspring',
+            date:      item.date   || '',
+            timestamp: new Date(item.date || 0).getTime(),
+            _original: true   // flag so the news page opens links in same tab
+        }));
 }
+
+// ══════════════════════════════════
+//  Auto Active Nav
+//  Matches the current page filename to the nearest .nav-link href
+//  and adds the .active class. Works on any page that loads content.js.
+// ══════════════════════════════════
+(function () {
+    var page = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-link').forEach(function (link) {
+        var href = link.getAttribute('href');
+        if (href && (href === page || (page === '' && href === 'index.html'))) {
+            link.classList.add('active');
+        }
+    });
+}());

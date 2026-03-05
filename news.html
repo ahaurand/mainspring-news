@@ -125,6 +125,8 @@
             cursor: pointer;
             transition: color 0.2s;
             position: relative;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .nav-link::after {
@@ -139,7 +141,7 @@
             transition: width 0.25s ease;
         }
 
-        .nav-link:hover { color: var(--text); }
+        .nav-link:hover { color: var(--gold); }
         .nav-link.active { color: var(--gold); }
         .nav-link.active::after { width: 22px; }
 
@@ -1212,7 +1214,7 @@
         <p class="tagline">Watch News and More, Wound for Enthusiasts</p>
         <nav class="site-nav">
             <a class="nav-link" href="index.html">Latest</a>
-            <a class="nav-link active" href="news.html">News</a>
+            <a class="nav-link" href="news.html">News</a>
             <a class="nav-link" href="reviews.html">Reviews</a>
             <a class="nav-link" href="polls.html">Polls</a>
         </nav>
@@ -1311,9 +1313,6 @@
 
         // Articles per page (pagination)
         const PAGE_SIZE = 36;
-
-        // Fallback placeholder: branded coil icon
-        const PLACEHOLDER_IMG = 'https://mainspring.news/coil-icon.png';
 
         let allArticles = [];
         let filteredArticles = [];
