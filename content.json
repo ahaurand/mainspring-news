@@ -41,18 +41,18 @@
     "tags": ["review", "formex", "gada", "essence 41"],
     "readTime": "6 min read"
   },
-  {
+{
     "id": 4,
     "type": "review",
     "status": "published",
     "featured": false,
-    "title": "Review: Another Watch Model",
-    "author": "Mainspring News",
-    "date": "2026-02-10",
-    "image": "",
-    "excerpt": "A second review entry to populate the Reviews grid. Replace this with real review content.",
-    "body": "<p>Full review body goes here.</p>",
-    "tags": ["review", "seiko"],
-    "readTime": "6 min read"
+    "title": "Review: Citizen Zenshin Mechanical",
+    "author": "Andrew Aurand",
+    "date": "2026-03-06",
+    "image": "https://citizenwatch.widen.net/content/o1q90c38go/webp/Zenshin+60+Mechanical.webp?u=41zuoe&width=1600&height=2000&quality=80&crop=false&keep=c&color=FFFFFF00",
+    "excerpt": "Citizen takes aim at the integrated bracelet market with the Zenshin 60 Mechanical. With a Super Titanium case and a stunning textured dial, is this the watch to finally dethrone the Tissot PRX?",
+    "body": "<p>Citizen is a global horological powerhouse, maintaining a rare level of vertical integration that allows them to produce world-class watches at staggering scale. From entry-level pieces designed to compete with Timex and Seiko to high-end 'The Citizen' models that challenge Grand Seiko’s dominance, the brand covers the entire spectrum of watchmaking. The Zenshin 60 Mechanical represents one of their latest entries in the mid-range market, proving that Citizen is not content to let others own the integrated-bracelet trend.</p><h3>The Evolution of the Zenshin</h3><p>The second-generation Zenshin 60 Mechanical is a significant improvement over the first iteration. While the original set the stage, this new generation refines the formula with a focus on better proportions and more sophisticated finishing. It serves as an excellent introductory integrated-bracelet option, positioning itself as a legitimate and technically superior alternative to the ubiquitous Tissot PRX.</p><h3>The Pros: Super Titanium and Sculpted Dials</h3><p>The standout feature of this watch is the use of Citizen’s proprietary Super Titanium. This material makes the watch incredibly lightweight on the wrist while providing a hardness and scratch resistance that far exceeds standard stainless steel. For a daily wearer, the comfort of titanium combined with a 40mm case that wears true to size makes for an exceptional ergonomic experience.</p><p>The dial texture is equally impressive. Citizen has moved away from flat surfaces to a deeply grained, almost organic texture that captures the light and elevates the watch far beyond its price point. When you consider the 60-hour power reserve and the integrated design that feels cohesive rather than forced, the value proposition becomes undeniable.</p><h3>The Cons: Movement Regulation and Clasp Tech</h3><p>Despite its strengths, the Zenshin is held back by a few missed opportunities in the finishing stages. While the Caliber 8322 is a reliable workhorse with a great power reserve, the factory regulation can be hit-or-miss. It would be encouraging to see Citizen tighten their accuracy tolerances to better compete with the precision of Swiss movements in this bracket.</p><p>Furthermore, in an era where micro-brands are standardizing on-the-fly adjustment, it is disappointing to see Citizen omit this from the Zenshin clasp. For a brand with their manufacturing might, tool-less micro-adjustment should be the standard, especially on an integrated bracelet where a perfect fit is critical to the aesthetic.</p><h3>Final Verdict</h3><p>The Citizen Zenshin 60 Mechanical is an amazing watch for the money and should definitely be on your radar if you are looking for a GADA watch that punches way above its weight. By combining the benefits of Super Titanium with a truly stunning dial, Citizen has created a mid-range contender that makes a very strong case for itself against the Swiss competition.</p>",
+    "tags": ["review", "citizen", "super titanium", "Zenshin 60", "integrated-bracelet"],
+    "readTime": "3 min read"
   }
 ]
