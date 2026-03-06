@@ -23,27 +23,31 @@
         /* ═══════════════════════════════════
            Article Reader — Page-Specific CSS
            ═══════════════════════════════════ */
+        /* Container matches the hero card width on Latest/Reviews */
         .article-wrapper {
-            max-width: 740px;
+            max-width: 1320px;
             margin: 0 auto;
             padding: 40px 24px 80px;
         }
 
-        /* ── Back link ── */
+        /* ── Back link — gold, uppercase, Cinzel ── */
         .article-back {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 11px;
-            letter-spacing: 0.08em;
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 10.5px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: var(--text-muted);
+            color: var(--gold);
             text-decoration: none;
             margin-bottom: 36px;
-            transition: color 0.2s;
+            transition: color 0.2s, opacity 0.2s;
+            opacity: 0.85;
         }
 
-        .article-back:hover { color: var(--gold); }
+        .article-back:hover { opacity: 1; color: var(--gold); }
 
         /* ── Article Header ── */
         .article-type-badge {
@@ -215,12 +219,12 @@
     <main>
         <div class="article-wrapper">
 
-            <!-- Back navigation -->
-            <a class="article-back" href="javascript:history.back()">
+            <!-- Back navigation — href and label set by JS below -->
+            <a class="article-back" id="articleBack" href="index.html">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
-                Back
+                <span id="articleBackLabel">Back to Latest</span>
             </a>
 
             <!-- Skeleton (visible while loading) -->
@@ -271,13 +275,29 @@
 
     <script src="content.js"></script>
     <script>
+        // ── Smart back link ──────────────────────────────────────────────
+        // Uses the HTTP Referrer to decide whether the user came from the
+        // Reviews page or anywhere else (defaults to Latest / index.html).
+        (function () {
+            var ref = document.referrer || '';
+            if (ref.indexOf('reviews.html') !== -1) {
+                var link  = document.getElementById('articleBack');
+                var label = document.getElementById('articleBackLabel');
+                if (link)  link.href        = 'reviews.html';
+                if (label) label.textContent = 'Back to Reviews';
+            }
+        }());
+
+        // ── Back to top ──────────────────────────────────────────────────
         const backToTopBtn = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             backToTopBtn.classList.toggle('visible', window.scrollY > 400);
         }, { passive: true });
         backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // Show mid-article ad once the article body is populated
+        // ── Render article + reveal mid-ad ───────────────────────────────
+        // renderArticlePage() reads ?id= from the URL, fetches content.json,
+        // and populates #articleBody with the title, image, and body HTML.
         renderArticlePage().then(() => {
             const adEl = document.getElementById('ad-article-mid');
             if (document.getElementById('articleBody').innerHTML && adEl) {
