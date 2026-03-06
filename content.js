@@ -72,7 +72,7 @@ async function fetchContent() {
 function buildHeroHTML(item) {
     const img        = item.image && item.image.trim() ? item.image : null;
     const articleUrl = `article.html?id=${item.id}`;
-    const badge      = item.type === 'review' ? 'Review' : 'Featured';
+    const badge      = item.type === 'review' ? 'Featured Review' : 'Featured';
 
     return `
     <section class="hero-section">

@@ -83,7 +83,7 @@
             background: #101214;
         }
 
-        .hero-image-wrap img {
+        .hero-image-wrap > img {
             position: absolute;
             inset: 0;
             width: 100%; height: 100%;
@@ -93,7 +93,7 @@
             display: block;
         }
 
-        .hero-link:hover .hero-image-wrap img { transform: scale(1.04); }
+        .hero-link:hover .hero-image-wrap > img { transform: scale(1.04); }
 
         .hero-placeholder {
             flex: 1;                /* fills the full width of the image panel  */
@@ -105,9 +105,9 @@
         }
 
         .hero-placeholder img {
-            width: 80%;             /* large, centred coil icon                 */
-            height: auto;
-            max-width: 220px;       /* caps it on very wide panels              */
+            height: 72%;            /* fills ~72% of the 340px panel height     */
+            width: auto;
+            max-height: 260px;      /* caps it on very tall panels              */
             opacity: 0.4;
             mix-blend-mode: screen;
             filter: brightness(0.7);
