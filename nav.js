@@ -5,10 +5,10 @@
    .active (gold text + underline, styled in site.css).
    ═══════════════════════════════════════════════════ */
 (function () {
-    // Normalise "/", "/index.html", "/opinion", "/opinion.html" → "opinion"
+    // Normalise "/", "/index.html", "/news", "/news.html" → "news" (homepage)
     function pageKey(path) {
         var name = (path || '').split('/').pop().replace(/\.html$/i, '');
-        return (name === '' || name === 'index') ? 'opinion' : name;
+        return (name === '' || name === 'index') ? 'news' : name;
     }
 
     // article.html belongs to whichever section the reader came from
