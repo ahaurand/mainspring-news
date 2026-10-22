@@ -1539,13 +1539,8 @@
             const logFn = loaded === 0 ? console.error : console.info;
             logFn(`[RSS] ${loaded}/${RSS_FEEDS.length} external feeds loaded`);
 
-            // Mainspring originals are pinned to the top, followed by external
-            // RSS items — each group newest first.
-            const byDate = (a, b) => b.timestamp - a.timestamp;
-            allArticles = [
-                ...originalItems.sort(byDate),
-                ...rssResults.flat().sort(byDate)
-            ];
+            // Mainspring originals and external RSS items share one timeline, newest first
+            allArticles = [...originalItems, ...rssResults.flat()].sort((a, b) => b.timestamp - a.timestamp);
 
             // Hide skeleton, show real grid
             document.getElementById('skeletonGrid').style.display = 'none';
