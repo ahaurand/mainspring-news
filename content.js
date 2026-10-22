@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════
    Mainspring News — Content Routing & Rendering
-   Shared by: index.html, reviews.html, article.html,
+   Shared by: opinion.html, reviews.html, article.html,
               and news.html (for original-content prepend)
 
    content.json schema per item:
@@ -136,7 +136,7 @@ function buildCardHTML(item, animIndex) {
 
 /*
  * renderContentPage(type)
- * Called by index.html ('article') and reviews.html ('review').
+ * Called by opinion.html ('article') and reviews.html ('review').
  * Expects these elements in the DOM:
  *   #contentSkeleton – hidden after load
  *   #contentHero     – receives the hero card
@@ -195,7 +195,7 @@ async function renderArticlePage() {
     if (!item) {
         if (bodyEl) bodyEl.innerHTML = `
             <p class="article-error">
-                Article not found. <a href="index.html">← Return to Latest</a>
+                Article not found. <a href="opinion.html">← Return to Opinion</a>
             </p>`;
         return;
     }
@@ -254,18 +254,3 @@ async function getOriginalArticlesAsRSSItems() {
             _original: true   // flag so the news page opens links in same tab
         }));
 }
-
-// ══════════════════════════════════
-//  Auto Active Nav
-//  Matches the current page filename to the nearest .nav-link href
-//  and adds the .active class. Works on any page that loads content.js.
-// ══════════════════════════════════
-(function () {
-    var page = window.location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.nav-link').forEach(function (link) {
-        var href = link.getAttribute('href');
-        if (href && (href === page || (page === '' && href === 'index.html'))) {
-            link.classList.add('active');
-        }
-    });
-}());

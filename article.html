@@ -23,7 +23,7 @@
         /* ═══════════════════════════════════
            Article Reader — Page-Specific CSS
            ═══════════════════════════════════ */
-        /* Container matches the hero card width on Latest/Reviews */
+        /* Container matches the hero card width on Opinion/Reviews */
         .article-wrapper {
             max-width: 1320px;
             margin: 0 auto;
@@ -201,17 +201,18 @@
     <!-- ═══ Header ═══ -->
     <header class="site-header">
         <div class="logo-group">
-            <a href="index.html">
+            <a href="opinion.html">
                 <img class="logo-img" src="https://mainspring.news/full-logo.png" alt="Mainspring News">
             </a>
         </div>
         <p class="tagline">Watch News and More, Wound for Enthusiasts</p>
-        <nav class="site-nav">
-            <a class="nav-link" href="index.html">Latest</a>
+        <nav class="site-nav" aria-label="Primary">
             <a class="nav-link" href="news.html">News</a>
+            <a class="nav-link" href="opinion.html">Opinion</a>
             <a class="nav-link" href="reviews.html">Reviews</a>
             <a class="nav-link" href="polls.html">Polls</a>
         </nav>
+        <script src="nav.js"></script>
         <hr class="header-border">
     </header>
 
@@ -220,11 +221,11 @@
         <div class="article-wrapper">
 
             <!-- Back navigation — href and label set by JS below -->
-            <a class="article-back" id="articleBack" href="index.html">
+            <a class="article-back" id="articleBack" href="opinion.html">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
-                <span id="articleBackLabel">Back to Latest</span>
+                <span id="articleBackLabel">Back to Opinion</span>
             </a>
 
             <!-- Skeleton (visible while loading) -->
@@ -277,7 +278,7 @@
     <script>
         // ── Smart back link ──────────────────────────────────────────────
         // Uses the HTTP Referrer to decide whether the user came from the
-        // Reviews page or anywhere else (defaults to Latest / index.html).
+        // Reviews page or anywhere else (defaults to Opinion / opinion.html).
         (function () {
             var ref = document.referrer || '';
             if (ref.indexOf('reviews.html') !== -1) {

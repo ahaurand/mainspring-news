@@ -117,17 +117,18 @@
     <!-- ═══ Header ═══ -->
     <header class="site-header">
         <div class="logo-group">
-            <a href="index.html">
+            <a href="opinion.html">
                 <img class="logo-img" src="https://mainspring.news/full-logo.png" alt="Mainspring News">
             </a>
         </div>
         <p class="tagline">Watch News and More, Wound for Enthusiasts</p>
-        <nav class="site-nav">
-            <a class="nav-link" href="index.html">Latest</a>
+        <nav class="site-nav" aria-label="Primary">
             <a class="nav-link" href="news.html">News</a>
+            <a class="nav-link" href="opinion.html">Opinion</a>
             <a class="nav-link" href="reviews.html">Reviews</a>
             <a class="nav-link" href="polls.html">Polls</a>
         </nav>
+        <script src="nav.js"></script>
         <hr class="header-border">
     </header>
 
@@ -210,17 +211,6 @@
             backToTopBtn.classList.toggle('visible', window.scrollY > 400);
         }, { passive: true });
         backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-        // Auto active nav
-        (function () {
-            var page = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-link').forEach(function (link) {
-                var href = link.getAttribute('href');
-                if (href && (href === page || (page === '' && href === 'index.html'))) {
-                    link.classList.add('active');
-                }
-            });
-        }());
     </script>
 </body>
 </html>

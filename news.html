@@ -1212,12 +1212,13 @@
             <img class="logo-img" src="https://mainspring.news/full-logo.png" alt="Mainspring News">
         </div>
         <p class="tagline">Watch News and More, Wound for Enthusiasts</p>
-        <nav class="site-nav">
-            <a class="nav-link" href="index.html">Latest</a>
+        <nav class="site-nav" aria-label="Primary">
             <a class="nav-link" href="news.html">News</a>
+            <a class="nav-link" href="opinion.html">Opinion</a>
             <a class="nav-link" href="reviews.html">Reviews</a>
             <a class="nav-link" href="polls.html">Polls</a>
         </nav>
+        <script src="nav.js"></script>
         <hr class="header-border">
     </header>
 
@@ -1300,12 +1301,21 @@
             { name: 'Revolution',            url: 'https://revolutionwatch.com/feed/' },
             { name: 'Quill & Pad',           url: 'https://quillandpad.com/feed/' },
             { name: 'WatchProSite',          url: 'https://www.watchprosite.com/rss/' },
-            { name: 'Gear Patrol',           url: 'https://www.gearpatrol.com/watches/' },
-            { name: 'Wrist Enthusiast',      url: 'https://www.wristenthusiast.com/latest' },
-            { name: 'Watches Magazine',      url: 'https://www.watches-news.com/news/' }
+            // Gear Patrol's feed is sitewide — keep only its Watches category
+            { name: 'Gear Patrol',           url: 'https://www.gearpatrol.com/feed/', category: 'Watches' },
+            { name: 'Wrist Enthusiast',      url: 'https://www.wristenthusiast.com/latest?format=rss' },
+            { name: 'Watches Magazine',      url: 'https://www.watches-news.com/feed/' }
         ];
 
-        const RSS2JSON_BASE = 'https://api.rss2json.com/v1/api.json?rss_url=';
+        // Feed endpoints, tried in order until one succeeds. Both return the
+        // rss2json JSON shape ({ status:'ok', items:[...] }).
+        //   1. /api/rss — our own Vercel function (api/rss.js); no CORS issues
+        //   2. rss2json — public fallback (now often blocked by a Cloudflare challenge)
+        const FEED_ENDPOINTS = [
+            { label: '/api/rss', build: f => `/api/rss?url=${encodeURIComponent(f.url)}${f.category ? `&category=${encodeURIComponent(f.category)}` : ''}` },
+            { label: 'rss2json', build: f => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}` }
+        ];
+        const FEED_TIMEOUT_MS = 10000;
 
         // Ads appear every 7–10 cards
         const AD_GAP_MIN = 7;
@@ -1475,34 +1485,67 @@
         // ══════════════════════════════════
         //  Fetch Feeds
         // ══════════════════════════════════
-        async function fetchAllFeeds() {
-            const rssPromises = RSS_FEEDS.map(async feed => {
-                try {
-                    const res = await fetch(`${RSS2JSON_BASE}${encodeURIComponent(feed.url)}`);
-                    const data = await res.json();
-                    if (data.status === 'ok' && data.items) {
-                        return data.items.map(item => ({
-                            title: item.title || '',
-                            link: item.link || '',
-                            image: extractImage(item, feed.name),
-                            summary: createSummary(item.description),
-                            readTime: calcReadTime(item, feed.name),
-                            source: feed.name,
-                            date: item.pubDate || '',
-                            timestamp: new Date(item.pubDate || 0).getTime()
-                        }));
-                    }
-                } catch (e) {
-                    console.warn(`Failed to fetch ${feed.name}:`, e);
-                }
-                return [];
-            });
+        function normalizeFeedItem(item, feed) {
+            return {
+                title: item.title || '',
+                link: item.link || '',
+                image: extractImage(item, feed.name),
+                summary: createSummary(item.description),
+                readTime: calcReadTime(item, feed.name),
+                source: feed.name,
+                date: item.pubDate || '',
+                timestamp: new Date(item.pubDate || 0).getTime() || 0
+            };
+        }
 
+        // Fetch one feed, falling back through FEED_ENDPOINTS. Never throws:
+        // failures are logged and resolve to [] so the grid always renders.
+        async function fetchFeed(feed) {
+            const errors = [];
+            for (const endpoint of FEED_ENDPOINTS) {
+                try {
+                    const res = await fetch(endpoint.build(feed), { signal: AbortSignal.timeout(FEED_TIMEOUT_MS) });
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const data = await res.json();
+                    if (data.status !== 'ok' || !Array.isArray(data.items)) {
+                        throw new Error(data.message || 'Unexpected response');
+                    }
+                    let items = data.items;
+                    // rss2json can't filter by category, so apply it here too
+                    if (feed.category) {
+                        const want = feed.category.toLowerCase();
+                        items = items.filter(i => (i.categories || []).some(c => String(c).toLowerCase() === want));
+                    }
+                    return items.map(item => normalizeFeedItem(item, feed));
+                } catch (e) {
+                    // fetch() rejects with a TypeError for CORS/network failures
+                    errors.push(`${endpoint.label}: ${e.name === 'TimeoutError' ? 'timed out' : e.message}`);
+                }
+            }
+            console.warn(`[RSS] ${feed.name} failed — ${errors.join('; ')}`);
+            return [];
+        }
+
+        async function fetchAllFeeds() {
             const [rssResults, originalItems] = await Promise.all([
-                Promise.all(rssPromises),
-                getOriginalArticlesAsRSSItems()
+                Promise.all(RSS_FEEDS.map(fetchFeed)),
+                getOriginalArticlesAsRSSItems().catch(e => {
+                    console.warn('[RSS] Could not load Mainspring originals from content.json:', e);
+                    return [];
+                })
             ]);
-            allArticles = [...originalItems, ...rssResults.flat()].sort((a, b) => b.timestamp - a.timestamp);
+
+            const loaded = rssResults.filter(items => items.length).length;
+            const logFn = loaded === 0 ? console.error : console.info;
+            logFn(`[RSS] ${loaded}/${RSS_FEEDS.length} external feeds loaded`);
+
+            // Mainspring originals are pinned to the top, followed by external
+            // RSS items — each group newest first.
+            const byDate = (a, b) => b.timestamp - a.timestamp;
+            allArticles = [
+                ...originalItems.sort(byDate),
+                ...rssResults.flat().sort(byDate)
+            ];
 
             // Hide skeleton, show real grid
             document.getElementById('skeletonGrid').style.display = 'none';
