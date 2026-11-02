@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mainspring News — Videos</title>
+    <meta name="description" content="The latest watch videos and Shorts from YouTube's top horology channels, in one feed — curated by Mainspring News.">
+    <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon">
+    <link rel="icon" href="favicon.ico?v=2" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="coil-icon.png?v=2">
+    <link rel="apple-touch-icon" href="coil-icon.png?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- ═══ Google AdSense ═══ -->
+    <!-- TODO: Replace ca-pub-XXXXXXXXXXXXXXXX with your actual AdSense publisher ID -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <!-- ═══ Strawpoll Widget ═══ -->
+    <script async src="https://cdn.strawpoll.com/dist/widgets.js" charset="utf-8"></script>
+
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0A0B0D;
+            --surface: #14161A;
+            --gold: #D4AF37;
+            --gold-hover: #BF9D2E;
+            --gold-dim: rgba(212, 175, 55, 0.15);
+            --text: #F5F5F7;
+            --text-muted: #A1A1A6;
+            --border: #1E2028;
+            --border-gold: rgba(212, 175, 55, 0.3);
+            --skeleton: #1A1D24;
+            --skeleton-shine: #22252E;
+            --shadow: 0 1px 4px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+            --shadow-hover: 0 8px 24px rgba(0,0,0,0.45), 0 2px 8px rgba(212,175,55,0.08);
+            --header-h: 140px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ═══════════════════════════════════
+           Sticky Header
+           ═══════════════════════════════════ */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            text-align: center;
+            padding: 20px 24px 0;
+            background: rgba(10, 11, 13, 0.82);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .header-border {
+            display: block;
+            height: 1px;
+            background: var(--gold);
+            border: none;
+            margin-top: 14px;
+            opacity: 0.35;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+            background: transparent;
+            padding: 0;
+            overflow: visible;
+        }
+
+        .logo-img {
+            max-height: 80px;
+            width: auto;
+            display: block;
+            mix-blend-mode: screen;
+        }
+
+        .site-header .tagline {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 10.5px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #8E8E93;
+            margin-bottom: 14px;
+        }
+
+        /* ── Nav ── */
+        .site-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+
+        .nav-link {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 11.5px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #E0E0E0;
+            background: none;
+            border: none;
+            padding: 8px 18px;
+            cursor: pointer;
+            transition: color 0.2s;
+            position: relative;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.25s ease;
+        }
+
+        .nav-link:hover { color: var(--gold); }
+        .nav-link.active { color: var(--gold); }
+        .nav-link.active::after { width: 22px; }
+
+        /* ═══════════════════════════════════
+           Search
+           ═══════════════════════════════════ */
+        .search-container {
+            max-width: 540px;
+            margin: 0 auto;
+            padding: 24px 24px 0;
+        }
+
+        .search-wrapper { position: relative; }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #636366;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 18px 12px 44px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 13.5px;
+            color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input::placeholder { color: #636366; }
+
+        .search-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-dim);
+        }
+
+        /* ── Source Pills ── */
+        .source-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 7px;
+            max-width: 880px;
+            margin: 18px auto 0;
+            padding: 0 24px;
+        }
+
+        .source-pill {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 10.5px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            padding: 5px 12px;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            background: var(--surface);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .source-pill:hover {
+            border-color: var(--gold);
+            color: var(--text);
+        }
+
+        .source-pill.active {
+            background: var(--gold);
+            color: var(--bg);
+            border-color: var(--gold);
+        }
+
+        /* ═══════════════════════════════════
+           Articles Grid
+           ═══════════════════════════════════ */
+        .grid-wrapper {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 28px 24px 80px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        /* ═══════════════════════════════════
+           Skeleton Loading
+           ═══════════════════════════════════ */
+        .skeleton-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 28px 24px 80px;
+        }
+
+        .skeleton-card {
+            background: var(--surface);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .skeleton-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: var(--skeleton);
+            animation: pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .skeleton-body {
+            padding: 18px;
+        }
+
+        .skeleton-line {
+            height: 14px;
+            border-radius: 6px;
+            background: var(--skeleton);
+            animation: pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            margin-bottom: 10px;
+        }
+
+        .skeleton-line:nth-child(1) { width: 92%; }
+        .skeleton-line:nth-child(2) { width: 70%; }
+        .skeleton-line:nth-child(3) { width: 38%; height: 10px; margin-top: 14px; margin-bottom: 0; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* ═══════════════════════════════════
+           Article Card
+           ═══════════════════════════════════ */
+        .article-card {
+            background: var(--surface);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.3s, transform 0.3s ease, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            animation: fadeUp 0.4s ease forwards;
+            position: relative;
+        }
+
+        .article-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+            border-color: var(--gold);
+        }
+
+        .card-image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #101214;
+        }
+
+        .card-image-container > img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.9);
+            transition: transform 0.4s ease;
+        }
+
+        .article-card:hover .card-image-container > img {
+            transform: scale(1.04);
+        }
+
+        .card-source {
+            position: absolute;
+            top: 10px; left: 10px;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: rgba(10, 11, 13, 0.82);
+            color: var(--gold);
+            padding: 4px 9px;
+            border-radius: 4px;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            z-index: 2;
+        }
+
+        /* ── Read Checkmark ── */
+        .card-read-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            background: rgba(10, 11, 13, 0.82);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.9;
+            z-index: 2;
+        }
+
+        .card-read-badge svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* ── Fallback placeholder / watermark styling ── */
+        .card-image-placeholder {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #14161A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-image-placeholder img {
+            /* Reset: override any inherited card-image rules */
+            position: static;
+            width: auto;
+            height: 50%;
+            object-fit: contain;
+            opacity: 0.5;
+            mix-blend-mode: screen;
+            filter: brightness(0.7);
+            transition: none;
+        }
+
+        .card-body {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .card-headline {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #E0E0E0;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .card-headline a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .card-headline a:hover { color: var(--gold); }
+
+        .card-summary {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-date {
+            font-size: 10px;
+            color: #86868B;
+            letter-spacing: 0.04em;
+        }
+
+        .card-read-time {
+            font-size: 10px;
+            color: #E0E0E0;
+            letter-spacing: 0.04em;
+            opacity: 0.55;
+            white-space: nowrap;
+        }
+
+        /* ═══════════════════════════════════
+           Native Ad Card
+           ═══════════════════════════════════ */
+        .native-ad-card {
+            background: var(--surface);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
+            transition: box-shadow 0.3s, transform 0.3s ease, border-color 0.3s;
+            opacity: 0;
+            animation: fadeUp 0.4s ease forwards;
+        }
+
+        .native-ad-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+            border-color: var(--gold);
+        }
+
+        .native-ad-inner {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .native-ad-label {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #636366;
+            text-align: center;
+            padding: 8px 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ── No Results ── */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 24px;
+        }
+
+        .no-results h3 {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .no-results p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ═══════════════════════════════════
+           Static Pages (About, Privacy)
+           ═══════════════════════════════════ */
+        .static-page {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .static-page h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .static-page .page-rule {
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            border: none;
+            margin-bottom: 32px;
+        }
+
+        .static-page h3 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--text);
+            margin-top: 36px;
+            margin-bottom: 12px;
+        }
+
+        .static-page p {
+            font-size: 15px;
+            line-height: 1.75;
+            color: #D1D1D6;
+            margin-bottom: 16px;
+        }
+
+        .static-page ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 16px;
+        }
+
+        .static-page ul li {
+            font-size: 15px;
+            line-height: 1.75;
+            color: #D1D1D6;
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .static-page ul li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 11px;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.9;
+        }
+
+        .static-page a {
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .static-page a:hover { border-bottom-color: var(--gold); }
+
+        .static-page .last-updated {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ── Email Us Ghost Button ── */
+        .email-cta {
+            display: inline-block;
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 17px;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            color: var(--gold);
+            background: transparent;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 14px 40px;
+            text-decoration: none;
+            transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.2s;
+            margin-top: 12px;
+        }
+
+        .email-cta:hover {
+            background: var(--gold);
+            color: var(--bg);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+            transform: translateY(-1px);
+            border-bottom-color: var(--gold);
+        }
+
+        /* ═══════════════════════════════════
+           Load More
+           ═══════════════════════════════════ */
+        .load-more-wrapper {
+            text-align: center;
+            padding: 40px 24px 0;
+        }
+
+        .load-more-btn {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 17px;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            color: var(--gold);
+            background: transparent;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 16px 48px;
+            cursor: pointer;
+            transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.2s;
+        }
+
+        .load-more-btn:hover {
+            background: var(--gold);
+            color: var(--bg);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .load-more-btn:disabled {
+            cursor: default;
+            opacity: 0.5;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .load-more-btn.exhausted {
+            border-color: var(--border);
+            color: var(--text-muted);
+            opacity: 1;
+            pointer-events: none;
+        }
+
+        .load-more-spinner {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 0 0;
+            background: transparent !important;
+        }
+
+        .load-more-spinner.visible { display: flex; }
+
+        .load-more-spiral {
+            animation: spin 1s linear infinite;
+            mix-blend-mode: screen;
+        }
+
+        .load-more-spinner-text {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.06em;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ═══════════════════════════════════
+           Back to Top
+           ═══════════════════════════════════ */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px; right: 32px;
+            width: 42px; height: 42px;
+            background: var(--gold);
+            color: var(--bg);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, transform 0.2s;
+            box-shadow: 0 2px 14px rgba(212, 175, 55, 0.3);
+            z-index: 100;
+        }
+
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            background: var(--gold-hover);
+        }
+
+        /* ═══════════════════════════════════
+           Footer
+           ═══════════════════════════════════ */
+        .site-footer {
+            text-align: center;
+            padding: 28px 24px 36px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-disclosure {
+            font-size: 11px;
+            line-height: 1.7;
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .footer-link {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 4px 8px;
+            transition: color 0.2s;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .footer-link:hover {
+            color: var(--gold);
+        }
+
+        .footer-link-sep {
+            color: #48484A;
+            font-size: 11px;
+            user-select: none;
+        }
+
+        .footer-copy {
+            font-size: 10px;
+            color: #86868B;
+            letter-spacing: 0.04em;
+        }
+
+        /* ═══════════════════════════════════
+           Watch Terms / Glossary
+           ═══════════════════════════════════ */
+        .glossary-page {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .glossary-page h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .glossary-page .page-rule {
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            border: none;
+            margin-bottom: 24px;
+        }
+
+        .glossary-intro {
+            font-size: 15px;
+            line-height: 1.75;
+            color: #D1D1D6;
+            margin-bottom: 28px;
+        }
+
+        .glossary-search-wrapper {
+            position: relative;
+            margin-bottom: 36px;
+        }
+
+        .glossary-search-wrapper .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #636366;
+            pointer-events: none;
+        }
+
+        .glossary-search {
+            width: 100%;
+            padding: 12px 18px 12px 44px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 13.5px;
+            color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .glossary-search::placeholder { color: #636366; }
+
+        .glossary-search:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-dim);
+        }
+
+        .glossary-letter-group {
+            margin-bottom: 32px;
+        }
+
+        .glossary-letter {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--gold);
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .glossary-term {
+            margin-bottom: 18px;
+            padding-left: 0;
+        }
+
+        .glossary-term-name {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Roboto', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .glossary-term-def {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #D1D1D6;
+        }
+
+        .glossary-no-results {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .glossary-footer-note {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .glossary-footer-note a {
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .glossary-footer-note a:hover {
+            border-bottom-color: var(--gold);
+        }
+
+        /* ═══════════════════════════════════
+           Responsive
+           ═══════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .articles-grid,
+            .skeleton-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 18px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .site-header { padding: 16px 16px 0; }
+            .logo-img { max-height: 52px; }
+            .site-header .tagline {
+                font-size: 8.5px;
+                letter-spacing: 0.14em;
+                margin-bottom: 10px;
+            }
+            .nav-link { font-size: 10px; padding: 6px 10px; }
+            .polls-page { padding: 32px 16px 60px; }
+            .polls-page h2 { font-size: 26px; }
+            .poll-iframe-shell,
+            .poll-iframe-shell iframe { min-height: 360px; }
+            .articles-grid,
+            .skeleton-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .grid-wrapper,
+            .skeleton-grid {
+                padding: 20px 16px 60px;
+            }
+            .search-container { padding: 18px 16px 0; }
+            .source-filters { padding: 0 16px; }
+            .card-body { padding: 14px; }
+            .card-headline { font-size: 1.05rem; }
+            .back-to-top { bottom: 20px; right: 20px; width: 38px; height: 38px; }
+            .static-page { padding: 32px 16px 60px; }
+            .static-page h2 { font-size: 26px; }
+            .glossary-page { padding: 32px 16px 60px; }
+            .glossary-page h2 { font-size: 26px; }
+        }
+
+        /* ═══════════════════════════════════
+           Polls Page
+           ═══════════════════════════════════ */
+        .polls-page {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .polls-page h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .polls-page .page-rule {
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            border: none;
+            margin-bottom: 28px;
+        }
+
+        .polls-intro {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            letter-spacing: 0.01em;
+        }
+
+        /* ── Live Poll Container ── */
+        .poll-live-wrap {
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            background: var(--surface);
+            overflow: hidden;
+            margin-bottom: 52px;
+            box-shadow: 0 2px 24px rgba(212, 175, 55, 0.07), var(--shadow);
+            transition: border-color 0.3s;
+        }
+
+        .poll-live-wrap:hover {
+            border-color: rgba(212, 175, 55, 0.55);
+        }
+
+        .poll-live-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 20px 13px;
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .poll-live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 7px rgba(212, 175, 55, 0.65);
+            animation: pollPulse 2.2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pollPulse {
+            0%, 100% { opacity: 1;    box-shadow: 0 0 7px  rgba(212, 175, 55, 0.65); }
+            50%       { opacity: 0.5; box-shadow: 0 0 14px rgba(212, 175, 55, 0.2);  }
+        }
+
+        .poll-live-label {
+            font-size: 9.5px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* ── Responsive iframe shell ──
+           Uses min-height so short embeds still look intentional;
+           the injected iframe overrides with its own height attribute.     */
+        .poll-iframe-shell {
+            position: relative;
+            width: 100%;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .poll-iframe-shell iframe {
+            width: 100%;
+            min-height: 480px;
+            border: none;
+            display: block;
+            flex: 1;
+            /* iOS Safari fix: allow iframe to scroll internally */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Strawpoll embed wrapper — centred, capped at 640px, full-width on mobile */
+        .strawpoll-embed {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .strawpoll-embed iframe {
+            width: 100% !important;
+            max-width: 100%;
+            min-height: 500px;
+            border: none;
+            display: block;
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* ── Poll State (loading / empty / error) ── */
+        .poll-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 60px 24px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .poll-state-icon {
+            color: var(--gold);
+            opacity: 0.55;
+        }
+
+        .poll-state-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .poll-loading-dots {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+        }
+
+        .poll-loading-dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.35;
+            animation: dotBounce 1.4s ease-in-out infinite;
+        }
+
+        .poll-loading-dots span:nth-child(2) { animation-delay: 0.18s; }
+        .poll-loading-dots span:nth-child(3) { animation-delay: 0.36s; }
+
+        @keyframes dotBounce {
+            0%, 80%, 100% { opacity: 0.35; transform: scale(0.85); }
+            40%            { opacity: 1;    transform: scale(1.2);  }
+        }
+
+        /* ── Past Polls Archive ── */
+        .polls-past-heading {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 19px;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .polls-past-rule {
+            display: block;
+            width: 28px;
+            height: 1px;
+            background: var(--gold);
+            border: none;
+            opacity: 0.55;
+            margin-bottom: 20px;
+        }
+
+        .polls-past-empty {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .past-polls-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .past-poll-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: border-color 0.22s, background 0.22s;
+        }
+
+        .past-poll-item:hover {
+            border-color: var(--border-gold);
+            background: #17191f;
+        }
+
+        .past-poll-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .past-poll-title {
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.45;
+        }
+
+        .past-poll-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 3px;
+            letter-spacing: 0.02em;
+        }
+
+        .past-poll-chevron {
+            color: var(--gold);
+            opacity: 0.6;
+            flex-shrink: 0;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .past-poll-item:hover .past-poll-chevron {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        /* ── Animation ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══════════════════════════════════
+           Video Cards — whole card opens the video
+           ═══════════════════════════════════ */
+        .video-card {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .video-card .card-headline a::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ Sticky Header ═══ -->
+    <header class="site-header">
+        <div class="logo-group">
+            <img class="logo-img" src="https://mainspring.news/full-logo.png" alt="Mainspring News">
+        </div>
+        <p class="tagline">Watch News and More, Wound for Enthusiasts</p>
+        <nav class="site-nav" aria-label="Primary">
+            <a class="nav-link" href="news.html">News</a>
+            <a class="nav-link" href="videos.html">Videos</a>
+            <a class="nav-link" href="opinion.html">Opinion</a>
+            <a class="nav-link" href="reviews.html">Reviews</a>
+            <a class="nav-link" href="polls.html">Polls</a>
+        </nav>
+        <script src="nav.js"></script>
+        <hr class="header-border">
+    </header>
+
+    <main>
+
+        <div class="search-container">
+            <div class="search-wrapper">
+                <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search by channel, watch, or keyword...">
+            </div>
+            <div class="source-filters" id="sourceFilters"></div>
+        </div>
+
+        <!-- Skeleton Loading State -->
+        <div class="skeleton-grid" id="skeletonGrid">
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div></div>
+        </div>
+
+        <!-- Real Video Grid (hidden until loaded) -->
+        <div class="grid-wrapper" id="gridWrapper" style="display:none;">
+            <div class="articles-grid" id="articlesGrid"></div>
+            <div class="load-more-wrapper" id="loadMoreWrapper">
+                <button class="load-more-btn" id="loadMoreBtn">Load More Videos</button>
+                <div class="load-more-spinner" id="loadMoreSpinner">
+                    <img class="load-more-spiral" src="https://mainspring.news/coil-icon.png" alt="" width="22" height="22">
+                    <span class="load-more-spinner-text">Winding&hellip;</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a class="footer-link" href="watch-terms.html">Watch Terms</a>
+            <span class="footer-link-sep">&middot;</span>
+            <a class="footer-link" href="about.html">About</a>
+            <span class="footer-link-sep">&middot;</span>
+            <a class="footer-link" href="privacy.html">Privacy</a>
+            <span class="footer-link-sep">&middot;</span>
+            <a class="footer-link" href="mailto:mainspring.watchnews@gmail.com?subject=Inquiry from Mainspring News" target="_blank" rel="noopener noreferrer">Contact</a>
+        </div>
+        <p class="footer-disclosure">This site uses Google AdSense to display advertisements.</p>
+        <p class="footer-copy">&copy; 2026 Mainspring News. All videos belong to their respective creators.</p>
+    </footer>
+
+    <script>
+        // ══════════════════════════════════
+        //  Configuration
+        // ══════════════════════════════════
+        // Channel IDs resolved from each channel's @handle. Pill order follows this list.
+        const YT_CHANNELS = [
+            { name: 'Chisholm Hunter',          id: 'UC3HNPqniYhBOrROu8SysD0g' },  // @ChisholmHunterOfficial
+            { name: 'The Mad Watch Collector',  id: 'UCED3DPNk9DHQn2MRogOd-CA' },  // @THEMADWATCHCOLLECTOR
+            { name: 'The 1916 Company',         id: 'UCpn6IctAyZPk1QoHUAAJUnQ' },
+            { name: 'Jenni Elle',               id: 'UC4TLvsSDZQb-TBrhDID3jPg' },  // @JenniElle
+            { name: 'This Watch, That Watch',   id: 'UCq3O2WzAtAEAXP8BU1lifxA' },  // @Mike.thiswatchthatwatch
+            { name: 'Anachronist',              id: 'UC5VxIXiCY7avq7xhMJi83GQ' },
+            { name: 'Teddy Baldassarre',        id: 'UCLGp7H4XuzA9TLJ0L4PUx8w' },  // @TeddyBaldassarre
+            { name: 'Beans & Bezels',           id: 'UCoj9KqSeirKbKrUaUPf2ZQg' },  // @BeansAndBezels
+            { name: 'Harrison Elmore',          id: 'UC6J6Dw3LwMlZlxn6cLhIRLQ' },  // @HarrisonElmore
+            { name: 'Roman Sharf',              id: 'UCoPXAn8QnYeVLvcW8z9LDmQ' },  // @RomanSharf
+            { name: 'Long Island Watch',        id: 'UCSEvXHaDCfaWRi0Nulu7Efw' },  // @islandwatch
+            { name: 'Bruce Williams',           id: 'UCaRodMWenne0HEEvwc2b3pw' },  // @BruceWilliams
+            { name: "Ben's Watch Club",         id: 'UC4zt4qDcBH5OcSRth5PbZqw' },  // @BensWatchClub
+            { name: 'The Urban Gentry',         id: 'UC0ulDfOIUVoZAhHPuCTiawg' },  // @theurbangentry
+            { name: "You're Terrific",          id: 'UCRImyW2li9K4tZvSmhFAOuQ' },  // @YoureTerrific
+            { name: 'Watches of Espionage',     id: 'UC8BFgd9QSsa1OysmOxBH7VQ' },  // @WatchesofEspionage
+            { name: 'Bark & Jack',              id: 'UCvIIb5YF8sUnm1D62jCvVVw' },  // @BarkandJack
+            { name: 'Britt Pearce',             id: 'UCw9nAWsTfosuUeWYNDUmVdg' },  // @BrittPearceWatches
+            { name: 'Esquire About Time',       id: 'UCan63scjMXNrlwKJdKeKPrg' },  // @EsquireAboutTime
+            { name: 'Federico Talks Watches',   id: 'UCH27JDu8g6tPDIjDikVGPog' },  // @FedericoTalksWatches
+            { name: 'Just One More Watch',      id: 'UCzllztCuniR_83Fwuz70xcg' },  // @JustOneMoreWatch
+            { name: 'Nico Leonard',             id: 'UCXPXfAAo-yV6Y-0PZecwBLw' },  // @NicoLeonard
+            { name: 'Watch Chris',              id: 'UCXHBBHcZ4D6E7RzGQ5S4FoA' },  // @WatchChris
+            { name: 'Wristwatch Revival',       id: 'UCD80T1s2Za4K682CQDGwEKQ' }   // @WristwatchRevival
+        ];
+
+        // Our Vercel function (api/youtube.js) — reads each channel's YouTube RSS feeds
+        const YT_ENDPOINT = id => `/api/youtube?channel=${encodeURIComponent(id)}`;
+        const FEED_TIMEOUT_MS = 12000;
+
+        // Ads appear every 7–10 cards
+        const AD_GAP_MIN = 7;
+        const AD_GAP_MAX = 10;
+
+        // Videos per page (pagination)
+        const PAGE_SIZE = 36;
+
+        let allVideos = [];
+        let filteredVideos = [];
+        let activeChannels = new Set();   // empty = all channels
+        let displayedCount = 0;
+        let adCounter = 0;
+        let nextAdAt = 0;
+
+        // ══════════════════════════════════
+        //  Viewed Tracking (localStorage)
+        // ══════════════════════════════════
+        const VIEWED_STORAGE_KEY = 'mainspring_viewed_videos';
+
+        function getViewedVideos() {
+            try {
+                return JSON.parse(localStorage.getItem(VIEWED_STORAGE_KEY)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function markAsViewed(videoId) {
+            const viewed = getViewedVideos();
+            if (!viewed.includes(videoId)) {
+                viewed.push(videoId);
+                try { localStorage.setItem(VIEWED_STORAGE_KEY, JSON.stringify(viewed)); } catch (e) {}
+            }
+        }
+
+        function isViewed(videoId) {
+            return getViewedVideos().includes(videoId);
+        }
+
+        // ══════════════════════════════════
+        //  Helpers
+        // ══════════════════════════════════
+        function randBetween(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // First sentence-ish of a YouTube description, minus links and hashtags
+        function createSummary(text) {
+            const clean = (text || '')
+                .replace(/https?:\/\/\S+/g, '')
+                .replace(/#\w+/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+            return clean.length > 180 ? clean.substring(0, 180).replace(/\s\S*$/, '') + '...' : clean;
+        }
+
+        // "Just now", "12 minutes ago", "2 hours ago", "Yesterday", "3 days ago", "2 weeks ago", "Sep 14, 2026"
+        function formatRelative(dateStr) {
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return '';
+            const mins = Math.floor((Date.now() - d) / 6e4);
+            const plural = (n, unit) => `${n} ${unit}${n === 1 ? '' : 's'} ago`;
+            if (mins < 1) return 'Just now';
+            if (mins < 60) return plural(mins, 'minute');
+            const hours = Math.floor(mins / 60);
+            if (hours < 24) return plural(hours, 'hour');
+            const days = Math.floor(hours / 24);
+            if (days === 1) return 'Yesterday';
+            if (days < 7) return plural(days, 'day');
+            if (days < 28) return plural(Math.floor(days / 7), 'week');
+            return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        // ══════════════════════════════════
+        //  SVG Templates
+        // ══════════════════════════════════
+        const MAINSPRING_WATERMARK = `<img src="https://mainspring.news/coil-icon.png" alt="" draggable="false">`;
+
+        const READ_CHECK_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+
+        // ══════════════════════════════════
+        //  Fetch Channels
+        // ══════════════════════════════════
+        // Never throws: failures are logged and resolve to [] so the grid always renders.
+        async function fetchChannel(channel) {
+            try {
+                const res = await fetch(YT_ENDPOINT(channel.id), { signal: AbortSignal.timeout(FEED_TIMEOUT_MS) });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                if (data.status !== 'ok' || !Array.isArray(data.items)) {
+                    throw new Error(data.message || 'Unexpected response');
+                }
+                return data.items.map(v => ({
+                    videoId: v.videoId,
+                    title: v.title || '',
+                    link: v.link || `https://www.youtube.com/watch?v=${v.videoId}`,
+                    summary: createSummary(v.description),
+                    channel: channel.name,
+                    isShort: !!v.isShort,
+                    duration: v.duration || '',
+                    date: v.published || '',
+                    timestamp: new Date(v.published || 0).getTime() || 0
+                }));
+            } catch (e) {
+                console.warn(`[Videos] ${channel.name} failed — ${e.name === 'TimeoutError' ? 'timed out' : e.message}`);
+                return [];
+            }
+        }
+
+        async function fetchAllChannels() {
+            const results = await Promise.all(YT_CHANNELS.map(fetchChannel));
+
+            const loaded = results.filter(items => items.length).length;
+            const logFn = loaded === 0 ? console.error : console.info;
+            logFn(`[Videos] ${loaded}/${YT_CHANNELS.length} channels loaded`);
+
+            // One unified timeline across every channel, newest first
+            allVideos = results.flat().sort((a, b) => b.timestamp - a.timestamp);
+
+            // Hide skeleton, show real grid
+            document.getElementById('skeletonGrid').style.display = 'none';
+            document.getElementById('gridWrapper').style.display = 'block';
+
+            renderChannelFilters();
+            applyFiltersAndRender();
+        }
+
+        // ══════════════════════════════════
+        //  Channel Filters (multi-select)
+        // ══════════════════════════════════
+        function renderChannelFilters() {
+            const container = document.getElementById('sourceFilters');
+            const withVideos = new Set(allVideos.map(v => v.channel));
+            const channels = YT_CHANNELS.map(c => c.name).filter(n => withVideos.has(n));
+
+            container.innerHTML =
+                `<button class="source-pill active" data-channel="">All Channels</button>` +
+                channels.map(n =>
+                    `<button class="source-pill" data-channel="${escapeHtml(n)}" aria-pressed="false">${escapeHtml(n)}</button>`
+                ).join('');
+
+            container.querySelectorAll('.source-pill').forEach(pill => {
+                pill.addEventListener('click', () => {
+                    const ch = pill.dataset.channel;
+                    if (!ch) {
+                        activeChannels.clear();
+                    } else if (activeChannels.has(ch)) {
+                        activeChannels.delete(ch);
+                    } else {
+                        activeChannels.add(ch);
+                    }
+                    container.querySelectorAll('.source-pill').forEach(p => {
+                        const on = p.dataset.channel ? activeChannels.has(p.dataset.channel) : activeChannels.size === 0;
+                        p.classList.toggle('active', on);
+                        if (p.dataset.channel) p.setAttribute('aria-pressed', on);
+                    });
+                    applyFiltersAndRender();
+                });
+            });
+        }
+
+        // ══════════════════════════════════
+        //  Filter + Reset Pagination
+        // ══════════════════════════════════
+        function applyFiltersAndRender() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+
+            filteredVideos = allVideos;
+            if (activeChannels.size) filteredVideos = filteredVideos.filter(v => activeChannels.has(v.channel));
+            if (query) filteredVideos = filteredVideos.filter(v =>
+                v.title.toLowerCase().includes(query) ||
+                v.summary.toLowerCase().includes(query) ||
+                v.channel.toLowerCase().includes(query)
+            );
+
+            // Reset pagination state
+            displayedCount = 0;
+            adCounter = 0;
+            nextAdAt = randBetween(AD_GAP_MIN, AD_GAP_MAX);
+
+            const grid = document.getElementById('articlesGrid');
+            grid.innerHTML = '';
+
+            if (filteredVideos.length === 0) {
+                grid.innerHTML = `<div class="no-results">
+                    <h3>No videos found</h3>
+                    <p>Try adjusting your search or clearing the channel filter.</p>
+                </div>`;
+                document.getElementById('loadMoreWrapper').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('loadMoreWrapper').style.display = 'block';
+            appendNextPage();
+        }
+
+        // ══════════════════════════════════
+        //  Native Ad Card HTML
+        // ══════════════════════════════════
+        function nativeAdCardHtml(n) {
+            return `
+            <div class="native-ad-card" style="animation-delay:${n * 0.04}s">
+                <div class="native-ad-inner">
+                    <div id="mainspring-native-ad-${n}">
+                        <!-- INSERT ADSENSE IN-FEED AD UNIT HERE -->
+                    </div>
+                </div>
+                <div class="native-ad-label">Sponsored</div>
+            </div>`;
+        }
+
+        // ══════════════════════════════════
+        //  Thumbnail Error Handler
+        //  maxresdefault (1280×720) → hqdefault (480×360) → coil placeholder
+        // ══════════════════════════════════
+        function handleThumbError(img) {
+            const fallback = img.dataset.fallback;
+            if (fallback) {
+                img.removeAttribute('data-fallback');
+                img.src = fallback;
+                return;
+            }
+            const container = img.parentNode;
+            if (!container) return;
+            img.remove();
+            const placeholder = document.createElement('div');
+            placeholder.className = 'card-image-placeholder';
+            placeholder.innerHTML = MAINSPRING_WATERMARK;
+            container.insertBefore(placeholder, container.firstChild);
+        }
+
+        // YouTube serves a 120×90 grey stub (HTTP 200 on some edges) when maxres doesn't exist
+        function checkThumbSize(img) {
+            if (img.naturalWidth && img.naturalWidth <= 120) handleThumbError(img);
+        }
+
+        // ══════════════════════════════════
+        //  Build Card HTML
+        // ══════════════════════════════════
+        function buildCardHtml(video, animIndex) {
+            const viewedBadge = isViewed(video.videoId)
+                ? `<span class="card-read-badge">${READ_CHECK_SVG}</span>`
+                : '';
+            const thumbBase = `https://i.ytimg.com/vi/${encodeURIComponent(video.videoId)}`;
+            const runtime = video.isShort ? 'Short' : video.duration;
+
+            return `
+            <article class="article-card video-card" style="animation-delay:${Math.min(animIndex * 0.03, 0.5)}s">
+                <div class="card-image-container">
+                    <img src="${thumbBase}/maxresdefault.jpg" data-fallback="${thumbBase}/hqdefault.jpg" alt="" loading="lazy" onerror="handleThumbError(this)" onload="checkThumbSize(this)">
+                    <span class="card-source">${escapeHtml(video.channel)}</span>
+                    ${viewedBadge}
+                </div>
+                <div class="card-body">
+                    <h2 class="card-headline"><a href="${escapeHtml(video.link)}" target="_blank" rel="noopener noreferrer" data-track-view="${escapeHtml(video.videoId)}">${escapeHtml(video.title)}</a></h2>
+                    <p class="card-summary">${escapeHtml(video.summary)}</p>
+                    <div class="card-footer">
+                        <span class="card-date">${formatRelative(video.date)}</span>
+                        ${runtime ? `<span class="card-read-time">${escapeHtml(runtime)}</span>` : ''}
+                    </div>
+                </div>
+            </article>`;
+        }
+
+        // ══════════════════════════════════
+        //  Append Next Page of Videos
+        // ══════════════════════════════════
+        function appendNextPage() {
+            const grid = document.getElementById('articlesGrid');
+            const btn = document.getElementById('loadMoreBtn');
+            const start = displayedCount;
+            const end = Math.min(start + PAGE_SIZE, filteredVideos.length);
+            const fragment = [];
+
+            let localCount = 0;
+
+            for (let i = start; i < end; i++) {
+                localCount++;
+                displayedCount++;
+
+                fragment.push(buildCardHtml(filteredVideos[i], localCount));
+
+                // Ad insertion logic: track total cards displayed for ad spacing
+                if (displayedCount === nextAdAt && i + 1 < filteredVideos.length) {
+                    adCounter++;
+                    fragment.push(nativeAdCardHtml(adCounter));
+                    nextAdAt += randBetween(AD_GAP_MIN, AD_GAP_MAX);
+                }
+            }
+
+            grid.insertAdjacentHTML('beforeend', fragment.join(''));
+
+            // Attach viewed-tracking to newly added links (the link covers the whole card)
+            grid.querySelectorAll('a[data-track-view]').forEach(link => {
+                if (!link._trackBound) {
+                    link._trackBound = true;
+                    link.addEventListener('click', function () {
+                        markAsViewed(this.dataset.trackView);
+                        const card = this.closest('.article-card');
+                        if (card && !card.querySelector('.card-read-badge')) {
+                            const imgContainer = card.querySelector('.card-image-container');
+                            if (imgContainer) {
+                                const badge = document.createElement('span');
+                                badge.className = 'card-read-badge';
+                                badge.innerHTML = READ_CHECK_SVG;
+                                imgContainer.appendChild(badge);
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Update button state
+            if (displayedCount >= filteredVideos.length) {
+                btn.textContent = 'All Videos Loaded';
+                btn.classList.add('exhausted');
+            } else {
+                btn.textContent = 'Load More Videos';
+                btn.classList.remove('exhausted');
+            }
+        }
+
+        // ══════════════════════════════════
+        //  Load More Button
+        // ══════════════════════════════════
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const loadMoreSpinner = document.getElementById('loadMoreSpinner');
+
+        loadMoreBtn.addEventListener('click', () => {
+            if (displayedCount >= filteredVideos.length) return;
+
+            // Show spinner, hide button
+            loadMoreBtn.style.display = 'none';
+            loadMoreSpinner.classList.add('visible');
+
+            // Brief delay to show the winding animation, then render
+            setTimeout(() => {
+                appendNextPage();
+                loadMoreSpinner.classList.remove('visible');
+                loadMoreBtn.style.display = '';
+            }, 600);
+        });
+
+        // ══════════════════════════════════
+        //  Live Search
+        // ══════════════════════════════════
+        let searchTimeout;
+        document.getElementById('searchInput').addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(applyFiltersAndRender, 200);
+        });
+
+        // ══════════════════════════════════
+        //  Back to Top
+        // ══════════════════════════════════
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ══════════════════════════════════
+        //  Init
+        // ══════════════════════════════════
+        fetchAllChannels();
+    </script>
+</body>
+</html>
